@@ -3,4 +3,5 @@
 /target/
 /.classpath
 /.project
+/Users/
 /src/main/webapp/spring/root-context.xml
