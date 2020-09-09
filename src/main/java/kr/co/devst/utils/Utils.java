@@ -1,0 +1,80 @@
+package kr.co.devst.utils;
+
+import java.io.File;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+public class Utils {
+	public static int parseToInt(String str, int num) {//문자열 "123"을 숫자로 파싱하는 유틸
+		int result = num;
+		
+		
+		try {
+			int parse = Integer.parseInt(str);
+			result = parse;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	//이미지, 파일경로, depth는 유저별 폴더를 분류하는경우
+	/* How to use */
+	//     1. String path = request.getSession().getServletContext().getRealPath("uploadImg");에 기본 업로드패스가 지정된다.
+	//     2. 사용자는 parameter중 filePath와 depth만 신경쓰면된다.
+	//	   3. filePath는 대분류를 나타낸다. ex)profile, product, 등등 
+	//	   4. depth는 소분류(user_pk)를 나타낸다. ex)profile중 user_pk가 2인 사람의 이미지들
+	//	   5. 다형성을 통해 대분류, 소분류가 각각 필요하거나 필요하지 않은경우를 null이 아닌 parameter 자체를 안받고 사용가능하게 함
+	public static String uploadFile(MultipartFile multiFile, String filePath, HttpServletRequest request, String depth) {
+		String fileName = multiFile.getOriginalFilename();//db저장될 파일명
+		System.out.println("mulitFile : "+fileName);
+		String path = request.getSession().getServletContext().getRealPath("uploadImg");
+		if(filePath != null) {
+			path= path+"/"+filePath;
+		}
+		if(depth != null){
+			path= path+"/"+depth;
+		}
+		path+="/";	
+		System.out.println("path : "+path);
+		
+		File file = new File(path);
+		if(!file.exists()) {//없으면 생성
+			System.out.println("경로 : "+path);
+			file.mkdirs();
+		}
+		
+		byte[] bytes;
+		file = new File(path,multiFile.getOriginalFilename());
+		System.out.println("fileName : "+multiFile.getOriginalFilename());
+		
+		
+		
+		try {
+			bytes = multiFile.getBytes();
+			FileCopyUtils.copy(bytes, file);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fileName;
+	}
+	
+	//다형성으로 폴더세분화, 유저별폴더정리 정의
+	public static String uploadFile(MultipartFile multiFile,  HttpServletRequest request) {
+		 return uploadFile( multiFile, null,  request, null);
+	}
+	
+	public static String uploadFile(MultipartFile multiFile, String filePath, HttpServletRequest request) {
+		 return uploadFile( multiFile, filePath,  request, null);
+	}
+	public static String uploadFile(MultipartFile multiFile, HttpServletRequest request,String depth) {
+		 return uploadFile( multiFile, null,  request, depth);
+	}
+	
+	
+}

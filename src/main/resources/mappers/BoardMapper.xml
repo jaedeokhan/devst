@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.devst.dao.BoardDao">
+	<insert id="doWrite">
+		INSERT INTO t_board ( title, content, category, hashtag, board_img) VALUES ( #{title}, #{content}, #{category}, #{hashtag}, #{board_img});
+	</insert>
+	
+	<select id="getBoardListAll" resultType="kr.co.devst.model.BoardVO">
+		SELECT * FROM t_board;
+	</select>
+	
+	<select id="getBoardStudyList" resultType="kr.co.devst.model.BoardVO" parameterType="hashMap"><!--스터디구인게시물  -->
+		SELECT * FROM t_board where category='스터디구인' order by board_pk desc limit #{start}, #{num};
+	</select>
+	
+	<select id="getBoardNomalList" resultType="kr.co.devst.model.BoardVO" parameterType="hashMap"><!--일반게시물  -->
+		SELECT * FROM t_board where category='일반' order by board_pk desc limit #{start}, #{num};
+	</select>
+</mapper>
