@@ -5,4 +5,4 @@
 /.project
 /.springBeans
 /Users/
-/src/main/webapp/spring/root-context.xml
+/src/main/webapp/WEB-INF/spring/root-context.xml
