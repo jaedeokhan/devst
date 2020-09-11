@@ -10,6 +10,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<a href="/devst/board/category?no=1">일반게시판</a>
+	<a href="/devst/board/category?no=2">스터디게시판</a>
+	<a href="/devst/board/category?no=3">~~게시판</a>
+	<a href="/devst/board/category?no=4">~~게시판</a>
+
 	<h1>모든게시물</h1>
 	<table>
 		<tr>
