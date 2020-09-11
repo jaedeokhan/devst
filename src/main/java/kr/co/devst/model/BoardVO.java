@@ -10,10 +10,30 @@ public class BoardVO {
 	private String r_dt;
 	private String m_dt;
 	
+	///join연산을위한 멤버필드 start//
+	private String nick;
+	private String name;
+	///join연산을위한 멤버필드 end//
+	
+	
+	
+	
 	
 	
 	public int getBoard_pk() {
 		return board_pk;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public void setBoard_pk(int board_pk) {
 		this.board_pk = board_pk;

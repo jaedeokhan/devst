@@ -59,4 +59,12 @@ public class BoardDaoImple implements BoardDao{
 		return sqlSession.selectList(NAME_SPACE+".getBoardNomalList",map);
 	}
 
+
+
+
+	@Override
+	public int getPageNum(String category) {
+		return sqlSession.selectOne(NAME_SPACE+".getPageNum",category);
+	}
+
 }

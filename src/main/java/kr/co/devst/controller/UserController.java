@@ -3,8 +3,6 @@ package kr.co.devst.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +17,6 @@ import kr.co.devst.service.UserService;
 
 @Controller
 public class UserController {
-	
-	private static final Logger log = LoggerFactory.getLogger(UserController.class);
-	
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -29,7 +24,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/devst", method = RequestMethod.GET)
 	public String goIdx(Model model) {
-		log.debug("**************** index form 호출 **************** ");
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		List<BoardVO> nomalList = new ArrayList<BoardVO>();
 		List<BoardVO> studyList = new ArrayList<BoardVO>();
@@ -46,7 +40,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/devst/join", method = RequestMethod.GET)
 	public String goJoin(Model model, @RequestParam (value = "error", required = false,defaultValue = "1")int error) {
-		log.debug("****************  join form 호출 **************** ");
+		
 		if(error != 1) {
 			model.addAttribute("msg","알수없는 에러발생 잠시후 다시시도해주세요.");
 		}
@@ -55,7 +49,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/devst/join", method = RequestMethod.POST)
 	public String doJoin(Model model, UserVO param) {
-		log.debug("****************  회원가입 동작 **************** ");
 		String resultAddr="/user/login";
 	
 		int result = userService.doJoin(param);
@@ -68,7 +61,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/devst/login", method = RequestMethod.GET)
 	public String goLogin(Model model) {
-		log.debug("****************  login form 호출 **************** ");
 		return "/user/login";
 	}
 	
