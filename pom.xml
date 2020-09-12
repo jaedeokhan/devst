@@ -42,12 +42,6 @@
 		
 		<!-- Logging -->
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
-			<scope>runtime</scope>
-		</dependency>		
-		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
@@ -89,6 +83,25 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- json -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.11.2</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.11.2</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.11.2</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib --><!--이미지업로더  -->
 		<dependency>
 		    <groupId>org.imgscalr</groupId>
