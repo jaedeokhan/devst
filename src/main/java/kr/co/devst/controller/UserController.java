@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.devst.model.BoardVO;
+import kr.co.devst.model.BoardVO_backup;
 import kr.co.devst.model.UserVO;
 import kr.co.devst.service.BoardService;
 import kr.co.devst.service.UserService;

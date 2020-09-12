@@ -2,6 +2,7 @@ package kr.co.devst.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +35,17 @@ public class BoardController {
 	public String goIdx(Model model) {
 		log.debug("********* 인덱스 페이지 *********");
 		List<BoardVO> list = new ArrayList<BoardVO>();
-		List<BoardVO> nomalList = new ArrayList<BoardVO>();
+		List<Map<String, String>> nomalList = new ArrayList<Map<String, String>>();
 		List<BoardVO> studyList = new ArrayList<BoardVO>();
-		list = boardService.getBoardListAll();
+//		List<BoardVO> nomalList = new ArrayList<BoardVO>();
+//		List<BoardVO> studyList = new ArrayList<BoardVO>();
+		list = boardService.getBoardListAll();		
 		nomalList = boardService.getBoardNomalList(0, 10);
 		studyList = boardService.getBoardStudyList(0, 10);
+		// nonalList 제대로 넘어오는지 확인해보기
+		for (int i = 0; i < nomalList.size(); i++) {
+			System.out.println("<" + (i + 1) + "> nomalList 목록 == "+ nomalList.get(i).toString());
+		}
 		model.addAttribute("boardList",list);
 		model.addAttribute("nomalList",nomalList);
 		model.addAttribute("studyList",studyList);
@@ -58,7 +65,7 @@ public class BoardController {
 	public void doBoardRegMod(Model model, HttpServletRequest request, BoardVO param,  HttpServletResponse response,MultipartHttpServletRequest multi, @RequestParam(value = "multiFile")MultipartFile multiFile) throws Exception{
 		log.debug("********* 게시판 작성 @@실행@@  *********");
 		String dbFileNm =  Utils.uploadFile(multiFile, request,"12");//하드코딩된 부분, USER테이블과 조인시 동적으로할당하자
-		param.setBoard_img(dbFileNm);
+		param.setBrdImage(dbFileNm);
 		 
 		 
 		int result = boardService.doWrite(param);
@@ -75,7 +82,7 @@ public class BoardController {
 	@RequestMapping(value = "/devst/board/category", method = RequestMethod.GET)
 	public String goBoardShow(Model model, @RequestParam(value = "no", required = false, defaultValue = "0" )int no) {
 		log.debug("********* 게시판 각각 세부사항 페이지  *********");
-		List <BoardVO> list = new ArrayList<BoardVO>(); //어떤 게시물을 담을 그릇
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>(); //어떤 게시물을 담을 그릇
 		String category = null;
 		Integer pageNum = null;
 		
@@ -93,7 +100,7 @@ public class BoardController {
 				break;
 			case 2://스터디게시판
 				
-				list = boardService.getBoardStudyList(0, 10);
+//				list = boardService.getBoardStudyList(0, 10);
 				pageNum = boardService.getPageNum("스터디구인");
 				category = "스터디게시판";
 				break;

@@ -30,10 +30,10 @@
 		<c:forEach var="list" items = "${boardList }" >
 		
 		<tr>
-			<td>${list.board_pk }</td>
-			<td>${list.title }</td>
-			<td>${list.hashtag }</td>
-			<td>${list.category }</td>
+			<td>${list.brdId }</td>
+			<td>${list.brdTitle }</td>
+			<td>${list.brdHashtag }</td>
+			<td>${list.brdCategory }</td>
 		</tr>
 		
 		</c:forEach>
@@ -54,10 +54,10 @@
 		<c:forEach var="list" items = "${nomalList }" >
 		
 		<tr>
-			<td>${list.board_pk }</td>
-			<td>${list.title }</td>
-			<td>${list.hashtag }</td>
-			<td>${list.category }</td>
+			<td>${list.brdId }</td>
+			<td>${list.brdTitle }</td>
+			<td>${list.brdHashtag }</td>
+			<td>${list.brdCategory }</td>
 		</tr>
 		
 		</c:forEach>
@@ -78,10 +78,10 @@
 		<c:forEach var="list" items = "${studyList }" >
 		
 		<tr>
-			<td>${list.board_pk }</td>
-			<td>${list.title }</td>
-			<td>${list.hashtag }</td>
-			<td>${list.category }</td>
+			<td>${list.brdId }</td>
+			<td>${list.brdTitle }</td>
+			<td>${list.brdHashtag }</td>
+			<td>${list.brdCategory }</td>
 		</tr>
 		
 		</c:forEach>

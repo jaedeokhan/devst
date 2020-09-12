@@ -1,69 +1,84 @@
 package kr.co.devst.model;
 
 public class BoardVO {
-	private int board_pk;
-	private String title;
-	private String content;
-	private String board_img;
-	private String category;
-	private String hashtag;
-	private String r_dt;
-	private String m_dt;
 	
-	
-	
-	public int getBoard_pk() {
-		return board_pk;
+	private int brdId;
+	private String brdTitle;
+	private String brdContent;
+	private String brdImage;
+	private String brdCategory;
+	private String brdHashtag;
+	private int brdViewCount;
+	private int brdLikeCount;
+	private int brdDislikeCount;
+	private String brdCreateDate; // r_dt
+	private String brdUpdateDate; // m_dt
+	public int getBrdId() {
+		return brdId;
 	}
-	public void setBoard_pk(int board_pk) {
-		this.board_pk = board_pk;
+	public void setBrdId(int brdId) {
+		this.brdId = brdId;
 	}
-	public String getTitle() {
-		return title;
+	public String getBrdTitle() {
+		return brdTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBrdTitle(String brdTitle) {
+		this.brdTitle = brdTitle;
 	}
-	public String getContent() {
-		return content;
+	public String getBrdContent() {
+		return brdContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setBrdContent(String brdContent) {
+		this.brdContent = brdContent;
 	}
-	
-	
-	
-	public String getBoard_img() {
-		return board_img;
+	public String getBrdImage() {
+		return brdImage;
 	}
-	public void setBoard_img(String board_img) {
-		this.board_img = board_img;
+	public void setBrdImage(String brdImage) {
+		this.brdImage = brdImage;
 	}
-	public String getCategory() {
-		return category;
+	public String getBrdCategory() {
+		return brdCategory;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setBrdCategory(String brdCategory) {
+		this.brdCategory = brdCategory;
 	}
-	public String getHashtag() {
-		return hashtag;
+	public String getBrdHashtag() {
+		return brdHashtag;
 	}
-	public void setHashtag(String hashtag) {
-		this.hashtag = hashtag;
+	public void setBrdHashtag(String brdHashtag) {
+		this.brdHashtag = brdHashtag;
 	}
-	public String getR_dt() {
-		return r_dt;
+	public int getBrdViewCount() {
+		return brdViewCount;
 	}
-	public void setR_dt(String r_dt) {
-		this.r_dt = r_dt;
+	public void setBrdViewCount(int brdViewCount) {
+		this.brdViewCount = brdViewCount;
 	}
-	public String getM_dt() {
-		return m_dt;
+	public int getBrdLikeCount() {
+		return brdLikeCount;
 	}
-	public void setM_dt(String m_dt) {
-		this.m_dt = m_dt;
+	public void setBrdLikeCount(int brdLikeCount) {
+		this.brdLikeCount = brdLikeCount;
 	}
-	
+	public int getBrdDislikeCount() {
+		return brdDislikeCount;
+	}
+	public void setBrdDislikeCount(int brdDislikeCount) {
+		this.brdDislikeCount = brdDislikeCount;
+	}
+	public String getBrdCreateDate() {
+		return brdCreateDate;
+	}
+	public void setBrdCreateDate(String brdCreateDate) {
+		this.brdCreateDate = brdCreateDate;
+	}
+	public String getBrdUpdateDate() {
+		return brdUpdateDate;
+	}
+	public void setBrdUpdateDate(String brdUpdateDate) {
+		this.brdUpdateDate = brdUpdateDate;
+	}
 	
 	
 	

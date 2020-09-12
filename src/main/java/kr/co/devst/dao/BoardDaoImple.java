@@ -52,7 +52,7 @@ public class BoardDaoImple implements BoardDao{
 
 
 	@Override
-	public List<BoardVO> getBoardNomalList(int start, int num) {
+	public List<Map<String, String>> getBoardNomalList(int start, int num) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("start", start);
 		map.put("num", num);
