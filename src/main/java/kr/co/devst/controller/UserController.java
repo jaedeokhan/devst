@@ -60,6 +60,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String goLogin(Model model) {
+		log.debug("********** 로그인 페이지 **********");
 		return "/user/login";
 	}
 	
@@ -68,6 +69,7 @@ public class UserController {
 	@RequestMapping(value = "/emailChk", method = RequestMethod.POST)
 	@ResponseBody
 	public int emailChk(UserVO userVO) throws Exception {
+		log.debug("********** 이에일 중복체크 @@실행@@ **********");
 		int result = userService.emailChk(userVO);
 		return result;
 	}

@@ -50,12 +50,13 @@ public class BoardController {
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.GET)
 	public String goBoardRegMod(Model model) {
+		log.debug("********* 게시판 작성 페이지  *********");
 		return "/user/board/regMod";
 	}
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.POST)
 	public void doBoardRegMod(Model model, HttpServletRequest request, BoardVO param,  HttpServletResponse response,MultipartHttpServletRequest multi, @RequestParam(value = "multiFile")MultipartFile multiFile) throws Exception{
-	
+		log.debug("********* 게시판 작성 @@실행@@  *********");
 		String dbFileNm =  Utils.uploadFile(multiFile, request,"12");//하드코딩된 부분, USER테이블과 조인시 동적으로할당하자
 		param.setBoard_img(dbFileNm);
 		 
@@ -73,6 +74,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/devst/board/category", method = RequestMethod.GET)
 	public String goBoardShow(Model model, @RequestParam(value = "no", required = false, defaultValue = "0" )int no) {
+		log.debug("********* 게시판 각각 세부사항 페이지  *********");
 		List <BoardVO> list = new ArrayList<BoardVO>(); //어떤 게시물을 담을 그릇
 		String category = null;
 		Integer pageNum = null;
