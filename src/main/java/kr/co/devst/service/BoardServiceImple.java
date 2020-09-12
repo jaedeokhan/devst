@@ -1,6 +1,5 @@
 package kr.co.devst.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,36 +33,14 @@ public class BoardServiceImple implements BoardService{
 
 	@Override
 	public List<BoardVO> getBoardStudyList(int start, int num) {
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		list = boardDao.getBoardStudyList(start, num);
-		for(int i=0;i<list.size();i++) {
-			String date	 = list.get(i).getM_dt();
-			list.get(i).setM_dt(date.split(" ")[0].replace("-", ""));
-		}
-		
-		return list;
+		return boardDao.getBoardStudyList(start, num);
 	}
 
 
 
 	@Override
 	public List<BoardVO> getBoardNomalList(int start, int num) {
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		list = boardDao.getBoardNomalList(start, num);
-		for(int i=0;i<list.size();i++) {
-			String date	 = list.get(i).getM_dt();
-			list.get(i).setM_dt(date.split(" ")[0].replace("-", ""));
-		}
-		
-		return list;
-	}
-
-
-
-	@Override
-	public int getPageNum(String category) {
-		
-		return boardDao.getPageNum(category);
+		return boardDao.getBoardNomalList(start, num);
 	}
 
 }

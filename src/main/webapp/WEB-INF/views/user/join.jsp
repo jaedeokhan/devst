@@ -1,90 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	#msg{color:#f00}
-</style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link href="<c:url value="/resources/user/css/join.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/user/js/join.js" />"></script>
 </head>
 <body>
-	<form method="post" action="/devst/join" id="frm" onsubmit="return joinChk()">
-	
-		<input type="text" placeholder="id" name="id" id="id">
-		<input type="password" placeholder="password(문자6자리이상, 최소 1개의 숫자 혹은 특수 문자를 포함)" name="pw" id="pw" maxlength="20">
-		<input type="password" placeholder="비밀번호확인(문자6자리이상, 최소 1개의 숫자 혹은 특수 문자를 포함)" id="rePw" maxlength="20">
-		<input type="text" placeholder="이름" name="name" id="name">
-		<input type="text" placeholder="닉네임" name="nick" id="nick">
-		<input type="submit" value="가입">
+<div id="container">
+	<!-- 헤더 들어갈 곳-->
+	<div class="sub_container">
+	<h2>회원가입</h2>
+	<form name="memberJoinForm" action="/user/doJoin" method="post" onsubmit="return joinChk()">
+	    <font color="red">* 필수 입력 항목</font>
+		<table class="join_table">
+			<tr>
+	            <td class="label_row"><label for="mem_email">이메일*</label></td>
+	        </tr>
+	        <tr>
+	            <td class="small_input">
+	                <input type="email" name="mem_email" id="mem_email" autofocus>
+	                <input type="button" class="checkBtn" value="중복확인" onclick="emailChk()">
+	            </td>
+	        </tr>
+	        <tr>
+	            <td class="label_row"><label for="mem_password">비밀번호*</label></td>
+	        </tr>
+	        <tr>
+	            <td class="big_input"><input type="password" name="mem_password" id="mem_password"  onkeyup="pwdCheck()"></td>
+	        </tr>
+	        <tr>
+	            <td class="label_row"><label for="password_Chk">비밀번호 확인*</label> 
+	            <small id="chkmsg"></small></td>
+	        </tr>
+	        <tr>
+	            <td class="big_input"><input type="password" name="password_Chk" placeholder="비밀번호를 한번 더 입력해주세요." onkeyup="pwdCheck()"></td>
+	        </tr>
+	        <tr>
+	            <td class="label_row"><label for="mem_username">이름*</label></td>
+	       	</tr>
+	        <tr>
+	            <td class="big_input"><input type="text" name="mem_username" id="mem_username"></td>
+	        </tr>
+	        <tr>
+	            <td class="label_row"><label for="mem_nickname">닉네임*</label></td>
+	       	</tr>
+	        <tr>
+	            <td class="big_input"><input type="text" name="mem_nickname" id="mem_nickname"></td>
+	        </tr>
+<!-- 			<tr> -->
+<!-- 			    <td class="label_row"><label for="mem_profile_image">프로필 사진*</label></td> -->
+<!-- 			</tr> -->
+		</table>
+		<div class="btn">
+			<input type="submit" value="회원가입" id="joinbtn">
+		</div>
 	</form>
-		<p id="msg"></p>
-	
-	<script>
-	var pwRule =/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/; //조건1. 6~20 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
-	
-	
-	
-		function joinChk(){
-			if(eleChk(frm.id)){
-				return false;
-			} else if(eleChk(frm.pw)){
-				return false;
-			} else if(!pwRule.test(frm.pw.value)) {
-				msg.innerHTML = "패스워드는 숫자, 문자포함 6~12자리로 지정해주세요"
-			    return false;
-			} else if(eleChk(frm.name)){
-				return false;
-			} else if(eleChk(frm.nick)){
-				return false;
-			} else if(msg.innerHTML == "비밀번호가 일치하지 않습니다."){
-				alert('비밀번호를 일치시켜 주세요.')
-				return false;
-			}
-		}
-	
-	
-	
-	
-	
-	
-		
-		function eleChk(ele){ //엘리먼트에대한 값 체크
-			if(ele.value.length == 0){
-				ele.focus();
-				msg.innerHTML = ele.placeholder + "을(를) 입력해 주세요";
-				return true;
-			}
-		}
-		
-		$("#rePw").keyup(function(){
-			var $pw = $("#pw").val();
-			var $rePw = $("#rePw").val();
-			
-			if($pw != $rePw){
-				$("#msg").html("비밀번호가 일치하지 않습니다.")
-				$("#pw, #rePw").css("color","red");
-			} else {
-				$("#msg").html('');
-				$("#pw, #rePw").css("color","");
-			}
-		})
-		
-		
-		$("#id, #name, #nick").click(function(){
-			if($("#msg").html() == "비밀번호가 일치하지 않습니다."){
-				alert('비밀번호를 일치시켜 주세요');
-				$("#rePw").focus();
-			}
-			
-		})
-		
-		
-	
-	
-	</script>
-
+	</div>
+	 <!-- 푸터 들어갈 곳-->
+</div>
 </body>
 </html>

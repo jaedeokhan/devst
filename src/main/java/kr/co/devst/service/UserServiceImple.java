@@ -11,12 +11,17 @@ import kr.co.devst.model.UserVO;
 public class UserServiceImple implements UserService{
 	@Autowired
 	private UserDao userDao;
-	
-	
-	@Override
-	public int doJoin(UserVO param) {
-		
-		return userDao.doJoin(param);
-	}
 
+	// 이메일 중복체크
+	@Override
+	public int emailChk(UserVO userVO) throws Exception {
+		int result = userDao.emailChk(userVO);
+		return result;
+	}
+	
+	// 회원가입
+	@Override
+	public int doJoin(UserVO userVO) throws Exception {
+		return userDao.doJoin(userVO);
+	}
 }
