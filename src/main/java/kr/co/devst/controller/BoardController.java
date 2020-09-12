@@ -7,6 +7,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +24,15 @@ import kr.co.devst.utils.Utils;
 
 @Controller
 public class BoardController {
+	
+	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
+	
 	@Autowired
 	private BoardService boardService;
 	
 	@RequestMapping(value = "/devst", method = RequestMethod.GET)
 	public String goIdx(Model model) {
+		log.debug("********* 인덱스 페이지 *********");
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		List<BoardVO> nomalList = new ArrayList<BoardVO>();
 		List<BoardVO> studyList = new ArrayList<BoardVO>();
