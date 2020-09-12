@@ -42,5 +42,11 @@ public class BoardServiceImple implements BoardService{
 	public List<BoardVO> getBoardNomalList(int start, int num) {
 		return boardDao.getBoardNomalList(start, num);
 	}
+	
+	@Override
+	public int getPageNum(String category) {
+		
+		return boardDao.getPageNum(category);
+	}
 
 }

@@ -1,6 +1,7 @@
 package kr.co.devst.utils;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,6 +9,35 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Utils {
+	
+	public static String getCurrentDate(String str) {//출력받을 날짜형태입력(ex yyyy-MM-dd, yyyy/MM/dd)
+		SimpleDateFormat format = new SimpleDateFormat(str);
+		String currentDate = null;
+		try {
+			currentDate = format.format(System.currentTimeMillis());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return currentDate;
+	}
+	
+	
+	public static String parseToStr(int num, String str) {
+		String result = str;
+		
+		try {
+			result = Integer.toString(num);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+	
+	
 	public static int parseToInt(String str, int num) {//문자열 "123"을 숫자로 파싱하는 유틸
 		int result = num;
 		

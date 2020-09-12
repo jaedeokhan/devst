@@ -9,4 +9,5 @@ public interface BoardService {
 	public List<BoardVO> getBoardListAll();
 	public List<BoardVO> getBoardStudyList(int start, int num);
 	public List<BoardVO> getBoardNomalList(int start, int num); 
+	public int getPageNum(String category);
 }

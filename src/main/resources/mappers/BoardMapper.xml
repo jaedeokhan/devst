@@ -12,10 +12,27 @@
 	</select>
 	
 	<select id="getBoardStudyList" resultType="kr.co.devst.model.BoardVO" parameterType="hashMap"><!--스터디구인게시물  -->
-		SELECT * FROM t_board where category='스터디구인' order by board_pk desc limit #{start}, #{num};
+		<!-- SELECT * FROM t_board where category='스터디구인' order by board_pk desc limit #{start}, #{num}; -->
+		SELECT  A.nick,A.name, B.*
+		FROM t_user as A
+		inner join t_board as B
+		ON A.user_pk = B.user_pk
+		WHERE B.category = '스터디구인'
+		ORDER BY B.board_pk DESC
+		LIMIT #{start}, #{num};
 	</select>
 	
 	<select id="getBoardNomalList" resultType="kr.co.devst.model.BoardVO" parameterType="hashMap"><!--일반게시물  -->
-		SELECT * FROM t_board where category='일반' order by board_pk desc limit #{start}, #{num};
+		SELECT  A.nick,A.name, B.*
+		FROM t_user as A
+		inner join t_board as B
+		ON A.user_pk = B.user_pk
+		WHERE B.category = '일반'
+		ORDER BY B.board_pk DESC
+		LIMIT #{start}, #{num};
+	</select>
+	
+	<select id="getPageNum" resultType="java.lang.Integer">
+		SELECT (TRUNCATE(COUNT(*)/10,0)+1) AS cnt FROM t_board WHERE category = #{category};
 	</select>
 </mapper>
