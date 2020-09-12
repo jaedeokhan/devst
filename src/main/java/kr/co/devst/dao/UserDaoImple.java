@@ -15,14 +15,17 @@ public class UserDaoImple implements UserDao{
 	private static final String NAME_SPACE = "kr.co.devst.dao.UserDao";
 	
 	
-
-	
-	
-	
+	// 회원가입
 	@Override
-	public int doJoin(UserVO param) {
-		
-		return  sqlSession.insert(NAME_SPACE+".doJoin",param);
+	public int doJoin(UserVO userVO) {
+		return  sqlSession.insert(NAME_SPACE+".doJoin", userVO);
+	}
+
+	// 이메일 중복체크
+	@Override
+	public int emailChk(UserVO userVO) throws Exception {
+		int result = sqlSession.selectOne(NAME_SPACE+ ".emailChk", userVO);
+		return result;
 	}
 
 }
