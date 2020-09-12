@@ -82,9 +82,10 @@
 		<c:forEach var="list" items="${list }">
 			<div class="boardItem">
 			<div class="boardCaterogy">
-			<c:if test="${list.m_dt >= currentTime -2 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
+			<!-- 에러 발생 :: Cannot convert [20. 9. 12 오후 3:11] of type [class java.sql.Timestamp] to [class java.lang.Long]  -->
+<%-- 			<c:if test="${list.brd_update_date >= currentTime -2 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
 				<div class="boardNew active">New</div>
-			</c:if>
+			</c:if> --%>
 				
 				<div class="boardBest ative">Best</div>
 			</div>
@@ -93,11 +94,11 @@
 				<div class="profileWrap">
 					<img src="https://placehold.it/120x120">
 				</div>
-				<p class="itemWriterNm">${list.nick }</p>
+				<p class="itemWriterNm">${list.mem_nickname }</p>
 			</div>
 			<div class="itemDesc">
-				<h3 class="itemDescTitle">${list.title }</h3>
-				<p class="itemDescContent">${list.content }</p>
+				<h3 class="itemDescTitle">${list.brd_title }</h3>
+				<p class="itemDescContent">${list.brd_content }</p>
 				
 				<div class="itemDescBtn">
 					<i class="far fa-thumbs-up">54</i>

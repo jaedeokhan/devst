@@ -1,6 +1,7 @@
 package kr.co.devst.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class BoardServiceImple implements BoardService{
 
 
 	@Override
-	public List<BoardVO> getBoardNomalList(int start, int num) {
+	public List<Map<String, String>> getBoardNomalList(int start, int num) {
 		return boardDao.getBoardNomalList(start, num);
 	}
 	

@@ -3,78 +3,73 @@ package kr.co.devst.model;
 import java.util.Date;
 
 public class UserVO {
-	private int mem_id;
-	private String mem_email;
-	private String mem_password;
-	private String mem_username;
-	private String mem_nickname;
-	private String mem_grade;
-	private Date mem_singup_date;
-	private Date mem_signin_date;
-	private String mem_profile_image;
-	
-	public int getMem_id() {
-		return mem_id;
+	private int memId;
+	private String memEmail;
+	private String memPassword;
+	private String memUsername;
+	private String memNickname;
+	private String memGrade;
+	private Date memSingupDate;
+	private Date memSigninDate;
+	private String memProfileImage;
+	public int getMemId() {
+		return memId;
 	}
-	public void setMem_id(int mem_id) {
-		this.mem_id = mem_id;
+	public void setMemId(int memId) {
+		this.memId = memId;
 	}
-	public String getMem_email() {
-		return mem_email;
+	public String getMemEmail() {
+		return memEmail;
 	}
-	public void setMem_email(String mem_email) {
-		this.mem_email = mem_email;
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
 	}
-	public String getMem_password() {
-		return mem_password;
+	public String getMemPassword() {
+		return memPassword;
 	}
-	public void setMem_password(String mem_password) {
-		this.mem_password = mem_password;
+	public void setMemPassword(String memPassword) {
+		this.memPassword = memPassword;
 	}
-	public String getMem_username() {
-		return mem_username;
+	public String getMemUsername() {
+		return memUsername;
 	}
-	public void setMem_username(String mem_username) {
-		this.mem_username = mem_username;
+	public void setMemUsername(String memUsername) {
+		this.memUsername = memUsername;
 	}
-	public String getMem_nickname() {
-		return mem_nickname;
+	public String getMemNickname() {
+		return memNickname;
 	}
-	public void setMem_nickname(String mem_nickname) {
-		this.mem_nickname = mem_nickname;
+	public void setMemNickname(String memNickname) {
+		this.memNickname = memNickname;
 	}
-	public String getMem_grade() {
-		return mem_grade;
+	public String getMemGrade() {
+		return memGrade;
 	}
-	public void setMem_grade(String mem_grade) {
-		this.mem_grade = mem_grade;
+	public void setMemGrade(String memGrade) {
+		this.memGrade = memGrade;
 	}
-	public Date getMem_singup_date() {
-		return mem_singup_date;
+	public Date getMemSingupDate() {
+		return memSingupDate;
 	}
-	public void setMem_singup_date(Date mem_singup_date) {
-		this.mem_singup_date = mem_singup_date;
+	public void setMemSingupDate(Date memSingupDate) {
+		this.memSingupDate = memSingupDate;
 	}
-	public Date getMem_signin_date() {
-		return mem_signin_date;
+	public Date getMemSigninDate() {
+		return memSigninDate;
 	}
-	public void setMem_signin_date(Date mem_signin_date) {
-		this.mem_signin_date = mem_signin_date;
+	public void setMemSigninDate(Date memSigninDate) {
+		this.memSigninDate = memSigninDate;
 	}
-	public String getMem_profile_image() {
-		return mem_profile_image;
+	public String getMemProfileImage() {
+		return memProfileImage;
 	}
-	public void setMem_profile_image(String mem_profile_image) {
-		this.mem_profile_image = mem_profile_image;
+	public void setMemProfileImage(String memProfileImage) {
+		this.memProfileImage = memProfileImage;
 	}
 	@Override
 	public String toString() {
-		return "UserVO [mem_id=" + mem_id + ", mem_email=" + mem_email + ", mem_password=" + mem_password
-				+ ", mem_username=" + mem_username + ", mem_nickname=" + mem_nickname + ", mem_grade=" + mem_grade
-				+ ", mem_singup_date=" + mem_singup_date + ", mem_signin_date=" + mem_signin_date
-				+ ", mem_profile_image=" + mem_profile_image + "]";
+		return "UserVO [memId=" + memId + ", memEmail=" + memEmail + ", memPassword=" + memPassword + ", memUsername="
+				+ memUsername + ", memNickname=" + memNickname + ", memGrade=" + memGrade + ", memSingupDate="
+				+ memSingupDate + ", memSigninDate=" + memSigninDate + ", memProfileImage=" + memProfileImage + "]";
 	}
-	
-
-	
 }
