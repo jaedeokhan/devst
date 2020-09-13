@@ -24,15 +24,15 @@
 	<div class="boardWrap">
 		<div class="boardBox">
 			<form action="/devst/board/regmod" id="frm" method="post" enctype="multipart/form-data">
-			<select name="category" class="boardCategory">
+			<select name="brdCategory" class="boardCategory">
 			    <option value="스터디구인">스터디구인</option>
 			    <option value="일반">일반게시판</option>
 			    <option value="abc">lorem</option>
 			    <option value="123">lorem</option>
 			</select>
-				<input type="text" placeholder="제목을 입력해주세요" name="title" class="boardTitle">
-				<input type="text" placeholder="hashtag" name="hashtag" class="boardHashtag">
-				<textarea name="content" class="boardContent"></textarea>
+				<input type="text" placeholder="제목을 입력해주세요" name="brdTitle" class="boardTitle">
+				<input type="text" placeholder="hashtag" name="brdHashtag" class="boardHashtag">
+				<textarea name="brdContent" class="boardContent"></textarea>
 				<div class="btnBox">
 					<input type="file" name="multiFile" class="boardImg" accept="image/*">
 					<button type="submit" class="btn btn-dark doBtn">&nbsp 작성 &nbsp</button>

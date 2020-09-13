@@ -1,6 +1,7 @@
 package kr.co.devst.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +37,7 @@ public class BoardController {
 		log.debug("********* 인덱스 페이지 *********");
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		List<Map<String, String>> nomalList = new ArrayList<Map<String, String>>();
-		List<BoardVO> studyList = new ArrayList<BoardVO>();
+		List<Map<String, String>> studyList = new ArrayList<Map<String, String>>();
 //		List<BoardVO> nomalList = new ArrayList<BoardVO>();
 //		List<BoardVO> studyList = new ArrayList<BoardVO>();
 		list = boardService.getBoardListAll();		
@@ -66,9 +67,14 @@ public class BoardController {
 		log.debug("********* 게시판 작성 @@실행@@  *********");
 		String dbFileNm =  Utils.uploadFile(multiFile, request,"12");//하드코딩된 부분, USER테이블과 조인시 동적으로할당하자
 		param.setBrdImage(dbFileNm);
-		 
-		 
-		int result = boardService.doWrite(param);
+		
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map = Utils.ObjToMap(param);
+		map.put("memId", "11");
+			
+		
+		int result = boardService.doWrite(map);
 		if(result != 1) {//글쓰기 실패
 			model.addAttribute("msg","글 쓰기에 실패했습니다.");
 			request.setAttribute("msg", "글 쓰기에 실패했습니다.");
@@ -100,7 +106,7 @@ public class BoardController {
 				break;
 			case 2://스터디게시판
 				
-//				list = boardService.getBoardStudyList(0, 10);
+				list = boardService.getBoardStudyList(0, 10);
 				pageNum = boardService.getPageNum("스터디구인");
 				category = "스터디게시판";
 				break;

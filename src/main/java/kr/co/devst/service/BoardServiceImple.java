@@ -18,9 +18,9 @@ public class BoardServiceImple implements BoardService{
 	
 	
 	@Override
-	public int doWrite(BoardVO param) {
+	public int doWrite(Map<String, String> map) {
 		System.out.println("boardService");
-		return boardDao.doWrite(param);
+		return boardDao.doWrite(map);
 	}
 
 
@@ -33,7 +33,7 @@ public class BoardServiceImple implements BoardService{
 
 
 	@Override
-	public List<BoardVO> getBoardStudyList(int start, int num) {
+	public List<Map<String, String>> getBoardStudyList(int start, int num) {
 		return boardDao.getBoardStudyList(start, num);
 	}
 

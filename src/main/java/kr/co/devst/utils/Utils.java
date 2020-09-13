@@ -1,12 +1,17 @@
 package kr.co.devst.utils;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.co.devst.model.BoardVO;
 
 public class Utils {
 	
@@ -106,5 +111,28 @@ public class Utils {
 		 return uploadFile( multiFile, null,  request, depth);
 	}
 	
+	
+	
+	
+	//object를 map형태로 변환
+	public static Map ObjToMap(Object obj){
+	    Map<String,Object> map = new HashMap<String, Object>();
+	    Field[] fields = obj.getClass().getDeclaredFields();
+	    for(int i=0; i <fields.length; i++){
+	        fields[i].setAccessible(true);
+	        try{
+	            map.put(fields[i].getName(), fields[i].get(obj));
+	           
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	      
+	        System.out.println("map의 정보 : "+map.toString());
+	    }
+	    return map;
+	}
+	
+	
+
 	
 }
