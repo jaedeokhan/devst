@@ -1,5 +1,7 @@
 package kr.co.devst.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,9 +20,9 @@ public class BoardServiceImple implements BoardService{
 	
 	
 	@Override
-	public int doWrite(BoardVO param) {
+	public int doWrite(Map<String, String> map) {
 		System.out.println("boardService");
-		return boardDao.doWrite(param);
+		return boardDao.doWrite(map);
 	}
 
 
@@ -33,15 +35,36 @@ public class BoardServiceImple implements BoardService{
 
 
 	@Override
-	public List<BoardVO> getBoardStudyList(int start, int num) {
-		return boardDao.getBoardStudyList(start, num);
+	public List<Map<String, String>> getBoardStudyList(int start, int num) {
+		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+		list = boardDao.getBoardStudyList(start, num);
+		for(int i=0;i<list.size();i++) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			String date = transFormat.format(list.get(i).get("brd_update_date"));
+			list.get(i).put("brd_update_date", date);
+
+		}
+				
+		
+		return list;
 	}
 
 
 
 	@Override
 	public List<Map<String, String>> getBoardNomalList(int start, int num) {
-		return boardDao.getBoardNomalList(start, num);
+		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+		list = boardDao.getBoardStudyList(start, num);
+	
+		for(int i=0;i<list.size();i++) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			String date = transFormat.format(list.get(i).get("brd_update_date"));
+			list.get(i).put("brd_update_date", date);
+
+		}
+				
+		
+		return list;
 	}
 	
 	@Override

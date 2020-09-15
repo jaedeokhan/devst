@@ -7,9 +7,9 @@ import kr.co.devst.model.BoardVO;
 import kr.co.devst.model.BoardVO_backup;
 
 public interface BoardService {
-	public int doWrite(BoardVO param);
+	public int doWrite(Map<String, String> map);
 	public List<BoardVO> getBoardListAll();
-	public List<BoardVO> getBoardStudyList(int start, int num);
+	public List<Map<String, String>> getBoardStudyList(int start, int num);
 	public List<Map<String, String>> getBoardNomalList(int start, int num); 
 	public int getPageNum(String category);
 }

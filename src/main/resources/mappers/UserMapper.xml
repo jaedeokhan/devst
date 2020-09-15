@@ -14,6 +14,6 @@
 	
 	<insert id="doJoin">
 		INSERT INTO member_tb (mem_email, mem_password, mem_username, mem_nickname, mem_profile_image) 
-		VALUES (#{mem_email}, #{mem_password}, #{mem_username}, #{mem_nickname}, #{mem_profile_image})
+		VALUES (#{memEmail}, #{memPassword}, #{memUsername}, #{memNickname}, #{memProfileImage})
 	</insert>
 </mapper>

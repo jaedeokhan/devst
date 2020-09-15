@@ -22,9 +22,9 @@ public class BoardDaoImple implements BoardDao{
 	
 	
 	@Override
-	public int doWrite(BoardVO param) {
+	public int doWrite(Map<String, String> map) {
 		 
-		return sqlSession.insert(NAME_SPACE+".doWrite",param);
+		return sqlSession.insert(NAME_SPACE+".doWrite",map);
 	}
 
 
@@ -40,7 +40,7 @@ public class BoardDaoImple implements BoardDao{
 
 
 	@Override
-	public List<BoardVO> getBoardStudyList(int start, int num) {
+	public List<Map<String, String>> getBoardStudyList(int start, int num) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("start", start);
 		map.put("num", num);

@@ -23,7 +23,7 @@
 	        </tr>
 	        <tr>
 	            <td class="small_input">
-	                <input type="email" name="mem_email" id="mem_email" autofocus>
+	                <input type="email" name="memEmail" id="mem_email" autofocus>
 	                <input type="button" class="checkBtn" value="중복확인" onclick="emailChk()">
 	            </td>
 	        </tr>
@@ -31,7 +31,7 @@
 	            <td class="label_row"><label for="mem_password">비밀번호*</label></td>
 	        </tr>
 	        <tr>
-	            <td class="big_input"><input type="password" name="mem_password" id="mem_password"  onkeyup="pwdCheck()"></td>
+	            <td class="big_input"><input type="password" name="memPassword" id="mem_password"  onkeyup="pwdCheck()"></td>
 	        </tr>
 	        <tr>
 	            <td class="label_row"><label for="password_Chk">비밀번호 확인*</label> 
@@ -44,13 +44,13 @@
 	            <td class="label_row"><label for="mem_username">이름*</label></td>
 	       	</tr>
 	        <tr>
-	            <td class="big_input"><input type="text" name="mem_username" id="mem_username"></td>
+	            <td class="big_input"><input type="text" name="memUsername" id="mem_username"></td>
 	        </tr>
 	        <tr>
 	            <td class="label_row"><label for="mem_nickname">닉네임*</label></td>
 	       	</tr>
 	        <tr>
-	            <td class="big_input"><input type="text" name="mem_nickname" id="mem_nickname"></td>
+	            <td class="big_input"><input type="text" name="memNickname" id="mem_nickname"></td>
 	        </tr>
 <!-- 			<tr> -->
 <!-- 			    <td class="label_row"><label for="mem_profile_image">프로필 사진*</label></td> -->

@@ -32,16 +32,60 @@
 	.boardNew, .boardBest{float:right; width:40px; height:40px; display:none;}
 	.boardNew.active{background-color:#FF4646; color:#fff; line-height: 40px; text-align: center; display:block;}
 	.boardBest.active{background-color:blue; color:#fff; line-height: 40px; text-align: center; display:block;}
-	.pageNumWrap{width:400px; margin:0 auto; overflow:hidden;}
+	.pageNumWrap{width:400px; margin:0 auto;  overflow:hidden;}
 	.pageNum{float:left;  width:80px; text-align:center;}
-	
+	.pageNum.active{color:red;}
+	.pageNumBox{width:3000px; background-color:#fab; overflow:hidden;}
 </style>
 <script>
 	$(function(){
 		var pageMaxNum = $("#pageMaxNum").val();
-		$(".pageNum").css({
-			width:(100/pageMaxNum)+"%"
-		});
+		var pageNumWidth = $('.pageNum').width();
+		 $(".pageNumBox").css({
+			width:pageMaxNum*pageNumWidth+"px"
+		}); 
+		$(".pageNumWrap")
+		
+		var currentPageNum = $('#pageNum').val();
+		
+		$(".pageNum").eq(currentPageNum-1).addClass('active');
+		
+		
+		//5, 9, 13, 17, 21, ...시 페이징 버튼 change
+		var pageArr = new Array();
+		for(var i = 1; i <= pageMaxNum;i++){
+			
+			if((i-1)%4 == 0|| (i-1)%4 == 1 || (i-1)%4 == 2 || (i-1)%4 == 3 && i>4){
+				
+				pageArr[i] = i;
+				console.log(pageArr[i])
+				$(".pageNum").eq(i-1).addClass("next");
+				var classNm = $(".pageNum").eq(i-1).attr("class")
+				
+				if(classNm == 'pageNum active next'){
+					let cnt = 0;	
+					let index = currentPageNum;
+					while(index > 4){
+						
+						index-=4;
+						
+						cnt++;
+						console.log("cnt : "+cnt)
+						console.log("index : "+index)
+					} 
+					console.log("cnt외부쪽 : "+cnt)
+					
+					$(".pageNumBox").css({
+						marginLeft: - pageNumWidth*4*cnt+"px"
+					})
+				}
+			}
+			
+		}
+		
+		
+		
+		
 	})
 </script>
 	
@@ -77,15 +121,15 @@
 			
 		</div> -->
 		<!--  -->
-		
+	
 		
 		<c:forEach var="list" items="${list }">
 			<div class="boardItem">
 			<div class="boardCaterogy">
 			<!-- 에러 발생 :: Cannot convert [20. 9. 12 오후 3:11] of type [class java.sql.Timestamp] to [class java.lang.Long]  -->
-<%-- 			<c:if test="${list.brd_update_date >= currentTime -2 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
+ 			<c:if test="${list.brd_update_date >= currentTime -1 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
 				<div class="boardNew active">New</div>
-			</c:if> --%>
+			</c:if> 
 				
 				<div class="boardBest ative">Best</div>
 			</div>
@@ -110,14 +154,33 @@
 		</div>
 		
 		</c:forEach>
-	</div>	
-	<input type="hidden" value="${pageNum }" id="pageMaxNum">
+	</div>
+	<input type="text" value="${pageNum }" id="pageNum">
+	<input type="hidden" value="${error }" id="errorMsg"><!--잘못된 접근시  -->
+	<input type="hidden" value="${no }" id="no">	
+	<input type="hidden" value="${pageMaxNum }" id="pageMaxNum">
 	<div class="pageNumWrap">
-		<c:forEach begin="1" end="${pageNum }" step="1" var="i">
-			<p class="pageNum"><c:out value="${i }" /></p> 
-		</c:forEach>
+		<%-- <c:forEach begin="1" end="${pageMaxNum }" step="1" var="i"> --%>
+		<div class="pageNumBox">
+			<c:forEach begin="1" end="20" step="1" var="i">
+				<p class="pageNum" onclick="pageChange(${i})"><c:out value="${i }" /></p> 
+			</c:forEach>
+		</div>
 	</div>
 	
+	<script>
+	if(errorMsg.value!=''){
+		alert(errorMsg.value);
+	}
 	
+	
+	function pageChange(pageNum){
+		var no = document.getElementById("no").value;
+	
+		location.href="/devst/board/category?no="+no+"&pageNum="+pageNum;
+	}
+	
+	
+	</script>
 </body>
 </html>
