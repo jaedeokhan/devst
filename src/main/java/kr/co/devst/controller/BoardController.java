@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.devst.model.BoardVO;
 import kr.co.devst.service.BoardService;
@@ -86,38 +87,52 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/devst/board/category", method = RequestMethod.GET)
-	public String goBoardShow(Model model, @RequestParam(value = "no", required = false, defaultValue = "0" )int no) {
+	public String goBoardShow(Model model,@RequestParam(value = "pageNum",required = false, defaultValue = "1")int pageNum,
+											@RequestParam(value = "no", required = false, defaultValue = "0")int no, RedirectAttributes rtta) {
 		log.debug("********* 게시판 각각 세부사항 페이지  *********");
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>(); //어떤 게시물을 담을 그릇
 		String category = null;
-		Integer pageNum = null;
-		
+		Integer pageMaxNum = null;
 		String currentTime = Utils.getCurrentDate("yyyyMMdd");
+		System.out.println("pageNum : "+pageNum);
+		
 		
 			switch(no) {
 			case 0://잘못된 접근 메인으로
 				return "redirect:/devst/";
 				
 			case 1://일반게시판
-				list = boardService.getBoardNomalList(0, 10);
-				pageNum = boardService.getPageNum("일반");
+				list = boardService.getBoardNomalList((pageNum-1)*10, 10);
+				pageMaxNum = boardService.getPageNum("일반");
 				
 				category = "일반게시판";
 				break;
 			case 2://스터디게시판
 				
-				list = boardService.getBoardStudyList(0, 10);
-				pageNum = boardService.getPageNum("스터디구인");
+				list = boardService.getBoardStudyList((pageNum-1)*10, 10);
+				pageMaxNum = boardService.getPageNum("스터디구인");
 				category = "스터디게시판";
 				break;
 			case 3://???
 				break;
 			case 4://???
 				break;
-				
+			default:
+				return "redirect:/devst/";
 		}
-		model.addAttribute("category",category);
-		model.addAttribute("pageNum",pageNum);
+			
+			//없는페이지 접근시 예외처리 지금은 다른작업때문에 주석중
+//			if(pageNum>pageMaxNum.intValue()) {
+//				System.out.println("pageNum : "+pageNum);
+//				System.out.println("pageMaxNum : "+pageMaxNum);
+//				rtta.addFlashAttribute("error","잘못된 접근입니다.");
+//				return "redirect:/devst/board/category?no="+no;
+//			}
+			
+		model.addAttribute("pageNum",pageNum);//현재 페이지쪽수(시작이 0)	
+		model.addAttribute("no",no);//URL에 들어가는 카테고리 
+		model.addAttribute("category",category);//게시판에 들어갈 카테고리명
+		model.addAttribute("pageMaxNum",20);//최대 페이지 수
 		model.addAttribute("list",list);
 		model.addAttribute("currentTime",currentTime);
 		return "/user/board/board";

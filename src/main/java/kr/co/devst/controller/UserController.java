@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.devst.model.BoardVO_backup;
 import kr.co.devst.model.UserVO;
@@ -41,20 +42,23 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/doJoin", method = RequestMethod.POST)
-	public String doJoin(Model model, UserVO userVO) throws Exception {
+	public String doJoin(Model model, UserVO userVO, RedirectAttributes rttr) throws Exception {
 		String resultAddr;
 		log.debug("********** 회원가입  @@실행@@ **********");
 		// 프로필 사진 여부 검사
 //		if(userVO.getMem_profile_image().equals("") || userVO.getMem_profile_image() == null) {
 //			userVO.setMem_profile_image("no_image");
 //		}
+		
+		
 		int result = userService.doJoin(userVO);
 		System.out.println(result);
 		if(result != 1) 
 			resultAddr = "redirect:/user/joinPage?error=-1";
-		else 
-			model.addAttribute("joinSuccesMsg","가입에 성공했습니다. 로그인해주세요.");
+		else {
+			rttr.addFlashAttribute("joinSuccesMsg","가입에 성공했습니다. 로그인해주세요.");
 			resultAddr = "redirect:/user/loginPage";
+		}
 		return resultAddr;
 	}
 	

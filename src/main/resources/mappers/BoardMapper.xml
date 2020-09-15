@@ -9,7 +9,7 @@
 
 
 
-	<insert id="doWrite"  parameterType="hashMap">
+	<insert id="doWrite" >
 		INSERT INTO board_tb ( brd_title, brd_content, brd_category, brd_hashtag, brd_image, mem_id) 
 		VALUES ( #{brdTitle}, #{brdContent}, #{brdCategory}, #{brdHashtag}, #{brdImage}, #{memId});
 	</insert>
