@@ -9,13 +9,14 @@ import kr.co.devst.model.UserVO;
 
 @Service
 public class UserServiceImple implements UserService{
+	
 	@Autowired
 	private UserDao userDao;
 
 	// 이메일 중복체크
 	@Override
-	public int emailChk(UserVO userVO) throws Exception {
-		int result = userDao.emailChk(userVO);
+	public int emailChk(String memEmail) throws Exception {
+		int result = userDao.emailChk(memEmail);
 		return result;
 	}
 	
@@ -24,4 +25,8 @@ public class UserServiceImple implements UserService{
 	public int doJoin(UserVO userVO) throws Exception {
 		return userDao.doJoin(userVO);
 	}
+
+
+
+
 }

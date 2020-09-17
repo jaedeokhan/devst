@@ -1,23 +1,23 @@
 @charset "UTF-8";
-#container {
+.container {
 	width: 100%;
 }
-.sub_container {
+#join_container {
 	width: 600px;
 	margin: 70px auto;
 }
 
-.sub_container h2 {
+#join_container h2 {
 	text-align: center;
 }
 
-.sub_container form {
+#join_container form {
 	width: 100%;
 	margin: 0 auto;
 	font-family: 'Cafe24Simplehae';
 }
 
-.sub_container .join_table {
+#join_container .join_table {
 	width: 100%;
 	margin-top: 10px;
 	margin-bottom: 30px;
