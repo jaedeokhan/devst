@@ -9,8 +9,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ import kr.co.devst.utils.Utils;
 @Controller
 public class BoardController {
 	
-	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
+	private static final Log log = LogFactory.getLog(BoardController.class);
 	
 	@Autowired
 	private BoardService boardService;
@@ -44,10 +44,6 @@ public class BoardController {
 		list = boardService.getBoardListAll();		
 		nomalList = boardService.getBoardNomalList(0, 10);
 		studyList = boardService.getBoardStudyList(0, 10);
-		// nonalList 제대로 넘어오는지 확인해보기
-		for (int i = 0; i < nomalList.size(); i++) {
-			System.out.println("<" + (i + 1) + "> nomalList 목록 == "+ nomalList.get(i).toString());
-		}
 		model.addAttribute("boardList",list);
 		model.addAttribute("nomalList",nomalList);
 		model.addAttribute("studyList",studyList);
