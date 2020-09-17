@@ -23,8 +23,8 @@ public class UserDaoImple implements UserDao{
 
 	// 이메일 중복체크
 	@Override
-	public int emailChk(UserVO userVO) throws Exception {
-		int result = sqlSession.selectOne(NAME_SPACE+ ".emailChk", userVO);
+	public int emailChk(String memEmail) throws Exception {
+		int result = sqlSession.selectOne(NAME_SPACE+ ".emailChk", memEmail);
 		return result;
 	}
 

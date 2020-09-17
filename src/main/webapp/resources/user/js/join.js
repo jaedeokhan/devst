@@ -3,14 +3,15 @@ function emailChk() {
 	var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
 	if (!reg_email.test(frm.mem_email.value)) {
+		alert("이메일형식에 맞지 않습니다.");
 		return false;
 	} else {
 		$.ajax({
-			url : "/user/emailChk",
+			url : "/devst/user/emailChk",
 			type : "post",
 			dataType : "json",
 			data : {
-				"mem_email" : frm.mem_email.value
+				"memEmail" : frm.mem_email.value
 			},
 			success : function(data) {
 				if (data == 1) {
@@ -18,7 +19,9 @@ function emailChk() {
 				} else {
 					alert("사용가능한 이메일 입니다.");
 				}
-			}
+			},error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
 		})
 	}
 }

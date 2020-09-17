@@ -12,6 +12,7 @@ public class UserVO {
 	private Date memSingupDate;
 	private Date memSigninDate;
 	private String memProfileImage;
+	
 	public int getMemId() {
 		return memId;
 	}

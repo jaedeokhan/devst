@@ -4,11 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.devst.dao.BoardDao">
 
-
-
-
-
-
 	<insert id="doWrite" >
 		INSERT INTO board_tb ( brd_title, brd_content, brd_category, brd_hashtag, brd_image, mem_id) 
 		VALUES ( #{brdTitle}, #{brdContent}, #{brdCategory}, #{brdHashtag}, #{brdImage}, #{memId});

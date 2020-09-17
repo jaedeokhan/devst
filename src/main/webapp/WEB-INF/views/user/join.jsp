@@ -11,11 +11,11 @@
 <script src="<c:url value="/resources/user/js/join.js" />"></script>
 </head>
 <body>
-<div id="container">
+<div class="container">
 	<!-- 헤더 들어갈 곳-->
-	<div class="sub_container">
+	<div id="join_container">
 	<h2>회원가입</h2>
-	<form name="memberJoinForm" action="/user/doJoin" method="post" onsubmit="return joinChk()">
+	<form name="memberJoinForm" action="/devst/user/join" method="post" onsubmit="return joinChk()">
 	    <font color="red">* 필수 입력 항목</font>
 		<table class="join_table">
 			<tr>

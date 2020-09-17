@@ -5,11 +5,11 @@
   
 <mapper namespace="kr.co.devst.dao.UserDao">
 
-	<select id="emailChk" resultType = "int">
+	<select id="emailChk" parameterType="String" resultType = "int">
 		SELECT count(*) 
 		FROM member_tb
-		WHERE mem_email like CONCAT (#{mem_email}, '%')
-		AND mem_email like CONCAT ('%', #{mem_email})
+		WHERE mem_email like CONCAT (#{value}, '%')
+		AND mem_email like CONCAT ('%', #{value})
 	</select>
 	
 	<insert id="doJoin">
