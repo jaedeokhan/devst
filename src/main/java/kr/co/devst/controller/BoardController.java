@@ -8,12 +8,14 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,8 +62,16 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.POST)
-	public void doBoardRegMod(Model model, HttpServletRequest request, BoardVO param,  HttpServletResponse response,MultipartHttpServletRequest multi, @RequestParam(value = "multiFile")MultipartFile multiFile) throws Exception{
+	public void doBoardRegMod(Model model, HttpServletRequest request,@Valid BoardVO param, BindingResult bindReulst ,HttpServletResponse response,MultipartHttpServletRequest multi, @RequestParam(value = "multiFile")MultipartFile multiFile) throws Exception{
 		log.debug("********* 게시판 작성 @@실행@@  *********");
+		RequestDispatcher rd =  request.getRequestDispatcher("/WEB-INF/views/user/board/regMod.jsp");
+		if(bindReulst.hasErrors()) {//클라이언트 전송에러
+			request.setAttribute("msg", "글 쓰기에 실패했습니다.");
+			rd.forward(request, response);
+			return;
+		}
+		
+		
 		String dbFileNm =  Utils.uploadFile(multiFile, request,"12");//하드코딩된 부분, USER테이블과 조인시 동적으로할당하자
 		param.setBrdImage(dbFileNm);
 		
@@ -72,10 +82,9 @@ public class BoardController {
 			
 		
 		int result = boardService.doWrite(map);
-		if(result != 1) {//글쓰기 실패
+		if(result != 1) {//글쓰기 실패 db에러
 			model.addAttribute("msg","글 쓰기에 실패했습니다.");
 			request.setAttribute("msg", "글 쓰기에 실패했습니다.");
-			RequestDispatcher rd =  request.getRequestDispatcher("/WEB-INF/views/user/board/regMod.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -134,6 +143,34 @@ public class BoardController {
 		return "/user/board/board";
 	}
 	
+	
+		
+	//작업중 삭제 ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ 안돼!!
+	
+	  @RequestMapping(value = "/devst/board/detail/category", method = RequestMethod.GET)
+	  public String goBoardDetail(Model model, @RequestParam(value = "id", required = false, defaultValue = "0")int id,
+			  									@RequestParam(value = "no", required = false, defaultValue = "0")int no ){
+		  
+		  	BoardVO param = new BoardVO();
+		  
+		  if(id == 0 || no == 0) {//올바르진 않은 접근
+			  return "/user/board/board"; 
+		  }
+		  param = new BoardVO(); param.setBrdId(id);
+		  param.setBrdCategory(Utils.MappingCategory(no));
+		  
+		  HashMap<String, String> boardOneInfoMap = boardService.getBoardOneInfo(param);
+		  
+		  if(boardOneInfoMap == null) {//잘못된 접근 
+			  return "/devst/board/category?no="+no; 
+		  } 
+		  model.addAttribute("oneInfo",boardOneInfoMap);
+	  
+	  
+	  
+		  return "/user/board/boardDetail"; 
+	  }
+	 
 	
 	
 	

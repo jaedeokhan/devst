@@ -6,21 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>login page</title>
+<link href="<c:url value="/resources/user/css/login.css" />" rel="stylesheet">
+<script src="<c:url value="/resources/user/js/login.js" />"></script>
 </head>
 <body>
-123
-	<input type="text" value="${joinSuccesMsg }" id="joinToLogin">
-	
-	
-	
-	<script>
-		window.onload = function(){
-			if(joinToLogin.value != null && joinToLogin.value != ''){//가입하고 로그인화면으로 이동한경우 가입됐다고 알려줌
-				alert(joinToLogin.value);
-			}
-		}
-		
-	
-	</script>
+<div class="container">
+	<!-- 헤더  -->
+	<div id="login_container">
+		<h2>로그인</h2>
+		<input type="hidden" value="${joinSuccessMsg }" id="joinToLogin">
+
+		<form name="memberLoginForm" action="/devst/user/login" method="post" onsubmit="return loginChk()">
+			<div class="loginBox">
+				<input type="email" name="memEmail" id="mem_email" placeholder="이메일" autofocus> 
+				<input type="password" name="memPassword" placeholder="비밀번호"> 
+				<input type="submit" value="로그인">
+			</div>
+		</form>
+	</div>
+	<!-- 푸터  -->
+</div>
 </body>
 </html>

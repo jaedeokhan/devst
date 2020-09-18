@@ -12,6 +12,13 @@
 		AND mem_email like CONCAT ('%', #{value})
 	</select>
 	
+	<select id="nickNameChk" parameterType="String" resultType = "int">
+		SELECT count(*) 
+		FROM member_tb
+		WHERE mem_nickname like CONCAT (#{value}, '%')
+		AND mem_nickname like CONCAT ('%', #{value})
+	</select>
+	
 	<insert id="doJoin">
 		INSERT INTO member_tb (mem_email, mem_password, mem_username, mem_nickname, mem_profile_image) 
 		VALUES (#{memEmail}, #{memPassword}, #{memUsername}, #{memNickname}, #{memProfileImage})

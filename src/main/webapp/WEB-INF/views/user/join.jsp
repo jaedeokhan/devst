@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>join page</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="<c:url value="/resources/user/css/join.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/user/js/join.js" />"></script>
@@ -23,8 +23,7 @@
 	        </tr>
 	        <tr>
 	            <td class="small_input">
-	                <input type="email" name="memEmail" id="mem_email" autofocus>
-	                <input type="button" class="checkBtn" value="중복확인" onclick="emailChk()">
+	                <input type="email" name="memEmail" id="mem_email" value="${memEmail }" readonly>
 	            </td>
 	        </tr>
 	        <tr>
@@ -50,7 +49,10 @@
 	            <td class="label_row"><label for="mem_nickname">닉네임*</label></td>
 	       	</tr>
 	        <tr>
-	            <td class="big_input"><input type="text" name="memNickname" id="mem_nickname"></td>
+	            <td class="big_input">
+	            	<input type="text" name="memNickname" id="mem_nickname">
+	            	<input type="button" class="checkBtn" value="중복확인" onclick="nickNameChk()">	
+	            </td>
 	        </tr>
 <!-- 			<tr> -->
 <!-- 			    <td class="label_row"><label for="mem_profile_image">프로필 사진*</label></td> -->

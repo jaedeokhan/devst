@@ -2,6 +2,7 @@ package kr.co.devst.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +72,13 @@ public class BoardServiceImple implements BoardService{
 	public int getPageNum(String category) {
 		
 		return boardDao.getPageNum(category);
+	}
+
+
+
+	@Override
+	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
+		return boardDao.getBoardOneInfo(param);
 	}
 
 }

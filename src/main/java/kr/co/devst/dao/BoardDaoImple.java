@@ -63,4 +63,12 @@ public class BoardDaoImple implements BoardDao{
 	public int getPageNum(String category) {
 		return sqlSession.selectOne(NAME_SPACE+".getPageNum",category);
 	}
+
+
+
+
+	@Override
+	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
+		return sqlSession.selectOne(NAME_SPACE+".getBoardOneInfo",param);
+	}
 }
