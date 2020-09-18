@@ -20,11 +20,20 @@ public class UserServiceImple implements UserService{
 		return result;
 	}
 	
+	// 닉네임 중복체크
+	@Override
+	public int nickNameChk(String memNickName) throws Exception {
+		int result = userDao.nickNameChk(memNickName);
+		return result;
+	}
+	
 	// 회원가입
 	@Override
 	public int doJoin(UserVO userVO) throws Exception {
 		return userDao.doJoin(userVO);
 	}
+
+	
 
 
 

@@ -1,31 +1,4 @@
-function emailChk() {
-	var frm = document.memberJoinForm;
-	var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-
-	if (!reg_email.test(frm.mem_email.value)) {
-		alert("이메일형식에 맞지 않습니다.");
-		return false;
-	} else {
-		$.ajax({
-			url : "/devst/user/emailChk",
-			type : "post",
-			dataType : "json",
-			data : {
-				"memEmail" : frm.mem_email.value
-			},
-			success : function(data) {
-				if (data == 1) {
-					alert("중복된 이메일 입니다.");
-				} else {
-					alert("사용가능한 이메일 입니다.");
-				}
-			},error:function(request,status,error){
-			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
-
-		})
-	}
-}
-
+// 회원가입 유효성 검사
 function joinChk() {
 	var frm = document.memberJoinForm;
 	var pwRule = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/; //조건1. 6~20 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
@@ -52,6 +25,7 @@ function joinChk() {
 	}
 }
 
+// 비밀번호 to 비밀번호확인 일치여부
 function pwdCheck() {
 	var frm = document.memberJoinForm;
 	var msg = document.getElementById("chkmsg");
@@ -63,4 +37,28 @@ function pwdCheck() {
 		msg.innerHTML = "비밀번호가 일치합니다.";
 		msg.style.color = "blue";
 	}
+}
+
+//닉네임 중복확인
+function nickNameChk() {
+	var frm = document.memberJoinForm;
+
+	$.ajax({
+		url : "/devst/user/nickNameChk",
+		type : "post",
+		dataType : "json",
+		data : {
+			"memNickName" : frm.mem_nickname.value
+		},
+		success : function(data) {
+			if (data == 1) {
+				alert("중복된 닉네임 입니다.");
+			} else {
+				alert("사용가능한 닉네임 입니다.");
+			}
+		},error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+	})
+
 }

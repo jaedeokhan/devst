@@ -13,7 +13,7 @@
 <div class="container">
 	<div id="certify_container">
 		<h2>이메일 인증</h2>
-		<form name="emailCertifyForm" action="/devst/user/emailCertify" method="post" onsubmit="return emailCertify()">
+		<form name="emailCertifyForm" method="post">
 			<div class="certifyBox">
 				<table>
 					<tr>
@@ -31,11 +31,11 @@
 					</tr>
 					<tr>
 						<td>
-							<input type="text" name="certificationNumber" placeholder="인증번호"> 
+							<input type="text" name="certificationNum" id="certification_num" placeholder="인증번호"> 
 						</td>
 						<td>
-							<input type="submit" value="인증하기">
-							<input type="hidden" id="certificationYN" value="false"> 
+							<input type="button" value="인증하기" onclick="emailCertify()">
+							<input type="hidden" id="certification_YN" value="false"> 
 						</td>
 					</tr>
 				</table>

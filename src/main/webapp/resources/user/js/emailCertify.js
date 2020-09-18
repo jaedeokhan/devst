@@ -33,5 +33,44 @@ function emailSend() {
 		},error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
 
-	})
+	});
+}
+
+// 인증번호 확인
+function emailCertify() {
+	var memEmail = document.getElementById("mem_email").value;
+	var inputNum = document.getElementById("certification_num").value;
+//	var yn = document.getElementById("certification_YN");
+
+	$.ajax({
+		type: "post",
+		url: "/devst/user/emailCertify",
+		data: {
+			"memEmail" : memEmail,
+			"inputNum" : inputNum
+		},
+		async: false,
+		success : function(data){
+			console.log("result : " + data);
+			
+//			memEmail.onchange = function() {
+//				yn.value = "false";
+//			}
+			
+			if(data == true) {
+				alert("인증되었습니다.");
+				
+//				yn.value = "true";
+				location.href = "/devst/user/joinPage?memEmail=" + memEmail;
+				
+			} else {
+//				if(yn.value == false) {
+//					alert("입력한 이메일을 확인해주세요.");
+//				} else {
+					alert("인증번호를 다시 확인해주세요.");
+//				}
+			}
+		}, error : function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+	});
 }
