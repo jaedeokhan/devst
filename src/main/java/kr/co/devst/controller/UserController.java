@@ -1,6 +1,7 @@
 package kr.co.devst.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,35 +41,51 @@ public class UserController {
 	@RequestMapping(value = "/emailSend", method = RequestMethod.POST)
 	@ResponseBody
 	public int doEmailCertify(HttpServletRequest request, String memEmail) throws Exception {
+		log.debug("********** 이메일 인증번호 전송  @@실행@@ **********");
+		
 		int result = 0;
+		
 		// 이메일 중복체크
 		result = userService.emailChk(memEmail);
 		if(result == 1) return result;
 		
-		mailService.emailSend(memEmail);
+		HttpSession session = request.getSession();
+		mailService.emailSend(session, memEmail);
 		 
 	
 		return result;
 	}
-	
-//	// 이메일 중복체크
-//		@RequestMapping(value = "/emailChk", method = RequestMethod.POST)
-//		@ResponseBody
-//		public int emailChk(UserVO userVO) throws Exception {
-//			log.debug("********** 이에일 중복체크 @@실행@@ **********");
-//			int result = userService.emailChk(userVO);
-//			return result;
-//		}
-//		
+
+	// 인증번호 확인
+	@RequestMapping(value = "/emailCertify", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean doEamilCertify(HttpServletRequest request, String memEmail, String inputNum) throws Exception {
+		log.debug("********** 인증번호 확인  @@실행@@ **********");
+		System.out.println(memEmail + " " + inputNum);
+		HttpSession session = request.getSession();
+		boolean result = mailService.emailCertify(session, memEmail, Integer.parseInt(inputNum));
+
+		return result;
+	}
 	
 	// 회원가입 페이지 이동
 	@RequestMapping(value = "/joinPage", method = RequestMethod.GET)
-	public String goJoin(Model model, @RequestParam (value = "error", required = false, defaultValue = "1")int error) {
+	public String goJoin(Model model, @RequestParam (value = "error", required = false, defaultValue = "1")int error, String memEmail) {
 		log.debug("********** 회원가입 페이지 **********");
 		if(error != 1) {
 			model.addAttribute("msg","알수없는 에러발생 잠시후 다시시도해주세요.");
 		}
+		model.addAttribute("memEmail", memEmail);
 		return "/user/join";
+	}
+	
+	// 닉네임 중복확인
+	@RequestMapping(value = "/nickNameChk", method = RequestMethod.POST)
+	@ResponseBody
+	public int doNickNameChk(String memNickName) throws Exception {
+		int result = userService.nickNameChk(memNickName);
+		
+		return result;
 	}
 	
 	// 회원가입
@@ -85,10 +102,10 @@ public class UserController {
 		int result = userService.doJoin(userVO);
 		System.out.println(result);
 		if(result != 1) 
-			resultAddr = "redirect:devst/user/joinPage?error=-1";
+			resultAddr = "redirect:/devst/user/joinPage?error=-1";
 		else {
-			rttr.addFlashAttribute("joinSuccesMsg","가입에 성공했습니다. 로그인해주세요.");
-			resultAddr = "redirect:devst/user/loginPage";
+			rttr.addFlashAttribute("joinSuccessMsg","가입에 성공했습니다. 로그인해주세요.");
+			resultAddr = "redirect:/devst/user/loginPage";
 		}
 		return resultAddr;
 	}
@@ -99,6 +116,14 @@ public class UserController {
 	public String goLogin(Model model) {
 		log.debug("********** 로그인 페이지 **********");
 		return "/user/login";
+	}
+	
+	// 로그인
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public int doLogin(Model model, UserVO userVO) throws Exception{
+		log.debug("********* 로그인 @실행@ **********");
+		
+		return 1;
 	}
 	
 
