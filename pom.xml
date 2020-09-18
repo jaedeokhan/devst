@@ -36,8 +36,6 @@
 		
 		
 		<!--valid  -->
-		
-		
 		<dependency>
 		    <groupId>javax.validation</groupId>
 		    <artifactId>validation-api</artifactId>
@@ -49,6 +47,15 @@
 		    <version>6.0.7.Final</version>
 		</dependency>
 
+
+	
+		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+	
 
 
 		<!-- AspectJ -->

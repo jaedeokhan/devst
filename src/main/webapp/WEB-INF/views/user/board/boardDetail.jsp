@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${one.brd_title }
+	<form action="/devst/user/ud" method="post">
+		<div class="boardDetailTitle" ><label for="board_detail_title">제목</label><input type="text" value="${oneInfo.brd_title }" id="board_detail_title"></div>
+		<div class="boardDetaiilContent"><textarea>${oneInfo.brd_content }</textarea></div>
+	</form>
+	
 </body>
 </html>

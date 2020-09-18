@@ -146,24 +146,31 @@ public class BoardController {
 	
 		
 	//작업중 삭제 ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ 안돼!!
-	/*
-	 * @RequestMapping(value = "/devst/board/detail/category", method =
-	 * RequestMethod.GET) public String goBoardDetail(Model model,
-	 * 
-	 * @RequestParam(value = "id", required = false, defaultValue = "0")int id,
-	 * 
-	 * @RequestParam(value = "no", required = false, defaultValue = "0")int no ){
-	 * if(id == 0 || no == 0) {//올바르진 않은 접근 return "/user/board/board"; } BoardVO
-	 * param = new BoardVO(); param.setBrdId(id);
-	 * param.setBrdCategory(Utils.MappingCategory(no)); System.out.println("여ㅣㄱ");
-	 * BoardVO getOne = boardService.getBoardOneInfo(param);
-	 * System.out.println("ㅇㅇ"); if(getOne == null) { return
-	 * "/devst/board/category?no="+no; } model.addAttribute("oneInfo",getOne);
-	 * 
-	 * 
-	 * 
-	 * return "/user/board/boardDetail"; }
-	 */
+	
+	  @RequestMapping(value = "/devst/board/detail/category", method = RequestMethod.GET)
+	  public String goBoardDetail(Model model, @RequestParam(value = "id", required = false, defaultValue = "0")int id,
+			  									@RequestParam(value = "no", required = false, defaultValue = "0")int no ){
+		  
+		  	BoardVO param = new BoardVO();
+		  
+		  if(id == 0 || no == 0) {//올바르진 않은 접근
+			  return "/user/board/board"; 
+		  }
+		  param = new BoardVO(); param.setBrdId(id);
+		  param.setBrdCategory(Utils.MappingCategory(no));
+		  
+		  HashMap<String, String> boardOneInfoMap = boardService.getBoardOneInfo(param);
+		  
+		  if(boardOneInfoMap == null) {//잘못된 접근 
+			  return "/devst/board/category?no="+no; 
+		  } 
+		  model.addAttribute("oneInfo",boardOneInfoMap);
+	  
+	  
+	  
+		  return "/user/board/boardDetail"; 
+	  }
+	 
 	
 	
 	
