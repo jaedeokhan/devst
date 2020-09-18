@@ -73,4 +73,11 @@ public class BoardServiceImple implements BoardService{
 		return boardDao.getPageNum(category);
 	}
 
+
+
+	@Override
+	public BoardVO getBoardOneInfo(BoardVO param) {
+		return boardDao.getBoardOneInfo(param);
+	}
+
 }

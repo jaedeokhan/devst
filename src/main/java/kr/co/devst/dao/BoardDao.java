@@ -12,4 +12,5 @@ public interface BoardDao {
 	public List<Map<String, String>> getBoardStudyList(int start, int num);
 	public List<Map<String, String>> getBoardNomalList(int start, int num);
 	public int getPageNum(String category);//카테고리를 파라미터로받아 페이징할 갯수 리턴
+	public BoardVO getBoardOneInfo(BoardVO param);//pk와 category 두개를 받아 select
 }

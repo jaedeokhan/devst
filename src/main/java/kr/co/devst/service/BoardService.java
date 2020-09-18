@@ -12,4 +12,6 @@ public interface BoardService {
 	public List<Map<String, String>> getBoardStudyList(int start, int num);
 	public List<Map<String, String>> getBoardNomalList(int start, int num); 
 	public int getPageNum(String category);
+	
+	public BoardVO getBoardOneInfo(BoardVO param);
 }

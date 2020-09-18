@@ -1,10 +1,23 @@
 package kr.co.devst.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class BoardVO {
 	
 	private int brdId;
+	
+	
+	@NotEmpty(message = "제목을 입력해주세요")
+	@Size(message = "제목은 4자이상 20자 미만입니다.")
 	private String brdTitle;
+	
+	@NotEmpty(message = "내용을 입력해주세요")
 	private String brdContent;
+	
 	private String brdImage;
 	private String brdCategory;
 	private String brdHashtag;
