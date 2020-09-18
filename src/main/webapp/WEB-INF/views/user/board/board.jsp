@@ -15,7 +15,6 @@
 	.boardItem{width:100%; height:120px; border:1px solid #ddd; position:relative; margin:20px;}
 	.boardCategoryNm{font-size:24px;}
 	.itemDesc{width:50%; heght:100%;  padding-top:30px; text-align:center;}
-	
 	.itemDescTitle{margin:5px 0; font-size:18px;}
 	.itemDescDate, .itemDescWriter, .itemDescDate, .itemDescContent{font-size:12px;}
 	.itemDescContent{margin-top:10px;}
@@ -25,9 +24,7 @@
 	.boardItem{overflow:hidden;}
 	.profileWrap{width:100px; height:100px; overflow:hidden; border-radius:25px;}
 	.profileWrap > img{  width: 100%; height: 100%; object-fit: cover;}
-	.itemWriterNm{text-align:center; margin-top:3px;}
-	
-	
+	.itemWriterNm{text-align:center; margin-top:3px; height:18px; line-height: 18px;}
 	.boardCaterogy{width:80px; height:40px;  float:right;}
 	.boardNew, .boardBest{float:right; width:40px; height:40px; display:none;}
 	.boardNew.active{background-color:#FF4646; color:#fff; line-height: 40px; text-align: center; display:block;}
@@ -35,18 +32,29 @@
 	.pageNumWrap{width:400px; margin:0 auto;  overflow:hidden;}
 	.pageNum{float:left;  width:80px; text-align:center;}
 	.pageNum.active{color:red;}
-	.pageNumBox{width:3000px; background-color:#fab; overflow:hidden;}
+	.pageNumBox{width:3000px;  overflow:hidden;}
+	.pagingNum{cursor:pointer; width:70%;}
+	.pageArrow{width:500px; height:53px; position:absolute; left:50%; transform:translateX(-50%); }
+	.pageArrow  i{line-height: 53px; font-size:28px; cursor:pointer; position:relative; bottom:53px; color:#666}
+	.pageLeftArrow{float:left;}
+	.pageRightArrow{float:right;}
+	.pageNav{position:relative;}
+	.fas.fa-arrow-right{padding-right:24px;}
+	.boardItem{cursor:pointer;}
+	 .boardItem:hover{background-color:#ddd;} 
+
 </style>
 <script>
 	$(function(){
-		var pageMaxNum = $("#pageMaxNum").val();
+		var pageMaxNum = $("#pageMaxNum").val();//최대페이지수
+		var currentPageNum = $('#pageNum').val();//현재페이지
 		var pageNumWidth = $('.pageNum').width();
 		 $(".pageNumBox").css({
 			width:pageMaxNum*pageNumWidth+"px"
 		}); 
 		$(".pageNumWrap")
 		
-		var currentPageNum = $('#pageNum').val();
+	
 		
 		$(".pageNum").eq(currentPageNum-1).addClass('active');
 		
@@ -70,22 +78,31 @@
 						index-=4;
 						
 						cnt++;
-						console.log("cnt : "+cnt)
-						console.log("index : "+index)
 					} 
-					console.log("cnt외부쪽 : "+cnt)
 					
 					$(".pageNumBox").css({
 						marginLeft: - pageNumWidth*4*cnt+"px"
-					})
+					});
 				}
 			}
 			
 		}
 		
 		
+		$(".boardItem").mouseover(function(){
+			$(".itemWriterInfo").css({
+				backgroundColor:"#fff"
+			})
+		})
 		
+		$(".pageLeftArrow").click(function(){
+			pageChange(--currentPageNum);
+		})
 		
+		$(".pageRightArrow").click(function(){
+			pageChange(++currentPageNum);
+		})
+	/* pageChange */
 	})
 </script>
 	
@@ -124,7 +141,7 @@
 	
 		
 		<c:forEach var="list" items="${list }">
-			<div class="boardItem">
+			<div class="boardItem" onclick="itemDetail(${list.brd_id})">
 			<div class="boardCaterogy">
 			<!-- 에러 발생 :: Cannot convert [20. 9. 12 오후 3:11] of type [class java.sql.Timestamp] to [class java.lang.Long]  -->
  			<c:if test="${list.brd_update_date >= currentTime -1 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
@@ -155,32 +172,53 @@
 		
 		</c:forEach>
 	</div>
-	<input type="text" value="${pageNum }" id="pageNum">
-	<input type="hidden" value="${error }" id="errorMsg"><!--잘못된 접근시  -->
-	<input type="hidden" value="${no }" id="no">	
+
 	<input type="hidden" value="${pageMaxNum }" id="pageMaxNum">
-	<div class="pageNumWrap">
-		<%-- <c:forEach begin="1" end="${pageMaxNum }" step="1" var="i"> --%>
-		<div class="pageNumBox">
-			<c:forEach begin="1" end="20" step="1" var="i">
-				<p class="pageNum" onclick="pageChange(${i})"><c:out value="${i }" /></p> 
-			</c:forEach>
+	<div class="pageNav">
+		<div class="pageNumWrap">
+			<%-- <c:forEach begin="1" end="${pageMaxNum }" step="1" var="i"> --%>
+			<div class="pageNumBox">
+				<c:forEach begin="1" end="20" step="1" var="i">
+					<div class="pageNum" onclick="pageChange(${i})"><p class="pagingNum"><c:out value="${i }" /></p></div> 
+				</c:forEach>
+			</div>
 		</div>
+		<div class="pageArrow">
+				<div class="pageLeftArrow"><i class="fas fa-arrow-left"></i></div>
+				<div class="pageRightArrow"><i class="fas fa-arrow-right"></i></div>
+		</div>
+		
 	</div>
 	
+	
+	
+	<!--서버단에서 클라이언트 페이지 판단하기위한 input  -->
+	<input type="text" value="${pageNum }" id="pageNum">
+	<input type="hidden" value="${error }" id="errorMsg"><!--잘못된 접근시  -->
+	<input type="hidden" value="${no }" id="no">	<!--카테고리 1 일반, 2 스터디  -->
+	
+	
+
 	<script>
-	if(errorMsg.value!=''){
-		alert(errorMsg.value);
-	}
-	
-	
-	function pageChange(pageNum){
-		var no = document.getElementById("no").value;
-	
-		location.href="/devst/board/category?no="+no+"&pageNum="+pageNum;
-	}
-	
+		if(errorMsg.value!=''){
+			alert(errorMsg.value);
+		}
+		
+		
+		function pageChange(pageNum){
+			var no = document.getElementById("no").value;
+		
+			location.href="/devst/board/category?no="+no+"&pageNum="+pageNum;
+		}
+		
+		function itemDetail(item_id){
+			var no = document.getElementById("no").value;
+			location.href="/devst/board/detail/category?no="+no+ "&id="+item_id;
+			
+		}
+		
 	
 	</script>
+	
 </body>
 </html>

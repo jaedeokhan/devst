@@ -132,6 +132,27 @@ public class Utils {
 	    return map;
 	}
 	
+	public static String MappingCategory(int num) {//case에 따른 카테고리 매핑
+		
+		String category = null;
+		switch(num) {
+			case 1:
+				category = "일반";
+				break;
+			case 2:
+				category = "스터디구인";
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+				
+		}
+		
+		
+		return category;
+	}
+	
 	
 
 	

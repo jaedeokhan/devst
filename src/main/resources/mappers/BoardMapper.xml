@@ -37,4 +37,13 @@
 	<select id="getPageNum" resultType="java.lang.Integer">
 		SELECT (TRUNCATE(COUNT(*)/10,0)+1) AS cnt FROM board_tb WHERE brd_category = #{brd_category};
 	</select>
+	
+	<select id="getBoardOneInfo" resultType="BoardVO">
+		SELECT  A.mem_nickname,A.mem_username, B.*
+		FROM member_tb as A
+		INNER JOIN board_tb as B
+		ON A.mem_id = B.mem_id
+		WHERE B.brd_category = #{brd_category} AND B.brd_id = #{brd_id};
+	</select>
+	
 </mapper>
