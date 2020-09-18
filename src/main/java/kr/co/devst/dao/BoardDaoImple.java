@@ -68,7 +68,7 @@ public class BoardDaoImple implements BoardDao{
 
 
 	@Override
-	public BoardVO getBoardOneInfo(BoardVO param) {
+	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
 		return sqlSession.selectOne(NAME_SPACE+".getBoardOneInfo",param);
 	}
 }

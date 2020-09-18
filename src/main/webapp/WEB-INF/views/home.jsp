@@ -10,11 +10,6 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<script>
-	window.onload = function(){
-		location.href="/devst";
-	}
-
-</script>
+	<jsp:forward page="/devst/"></jsp:forward>
 </body>
 </html>
