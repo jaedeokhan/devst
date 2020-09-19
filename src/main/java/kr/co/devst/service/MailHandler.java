@@ -16,6 +16,7 @@ public class MailHandler {
 	private MimeMessage message;
 	private MimeMessageHelper messageHelper;
 
+	
 	// 생성자
 	public MailHandler(JavaMailSender jSender) throws MessagingException {
 		this.sender = jSender;
