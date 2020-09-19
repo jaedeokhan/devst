@@ -134,6 +134,7 @@ public class Utils {
 	
 	public static String MappingCategory(int num) {//case에 따른 카테고리 매핑
 		
+		
 		String category = null;
 		switch(num) {
 			case 1:
