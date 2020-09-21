@@ -81,4 +81,11 @@ public class BoardServiceImple implements BoardService{
 		return boardDao.getBoardOneInfo(param);
 	}
 
+
+
+	@Override
+	public List<Map<String, String>> getMainBoardList10(String category) {
+		return boardDao.getMainBoardList10(category);
+	}
+
 }
