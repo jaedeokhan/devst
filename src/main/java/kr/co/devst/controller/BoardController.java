@@ -38,17 +38,13 @@ public class BoardController {
 	@RequestMapping(value = "/devst", method = RequestMethod.GET)
 	public String goIdx(Model model) {
 		log.debug("********* 인덱스 페이지 *********");
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		List<Map<String, String>> nomalList = new ArrayList<Map<String, String>>();
-		List<Map<String, String>> studyList = new ArrayList<Map<String, String>>();
-//		List<BoardVO> nomalList = new ArrayList<BoardVO>();
-//		List<BoardVO> studyList = new ArrayList<BoardVO>();
-		list = boardService.getBoardListAll();		
-		nomalList = boardService.getBoardNomalList(0, 10);
-		studyList = boardService.getBoardStudyList(0, 10);
+		
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+
+		list = boardService.getMainBoardList10("날짜순");		
+		
 		model.addAttribute("boardList",list);
-		model.addAttribute("nomalList",nomalList);
-		model.addAttribute("studyList",studyList);
+		
 		
 		
 		return "/index";

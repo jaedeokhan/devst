@@ -13,7 +13,38 @@
 		SELECT * FROM board_tb;
 	</select>
 	
-	<select id="getBoardStudyList" resultType="HashMap" parameterType="hashMap"><!--스터디구인게시물  -->
+	<select id="getMainBoardList10" resultType="HashMap" parameterType="String">
+		SELECT  A.mem_nickname, B.*
+		FROM member_tb as A
+		INNER JOIN board_tb as B
+		ON A.mem_id = B.mem_id
+		
+		<if test="value != null">
+			<choose>
+				<when test='value == "날짜순" '>
+					ORDER BY B.brd_id DESC
+				</when>
+				<when test='value == "인기순" '>
+					ORDER BY B.brd_like_count DESC
+				</when>
+				<when test="value.equals('조회순')">
+					ORDER BY B.brd_view_count DESC
+				</when>
+				<when test="value.equals('댓글순')">
+					ORDER BY B.brd_like_count DESC
+				</when>
+				
+			</choose>
+		</if>
+		
+			LIMIT 0,10;
+		
+		
+		
+		
+	</select>
+	
+	<select id="getBoardStudyList" resultType="HashMap" parameterType="hashMap" ><!--스터디구인게시물  -->
 		<!-- SELECT * FROM t_board where category='스터디구인' order by board_pk desc limit #{start}, #{num}; -->
 		SELECT  A.mem_nickname, B.*
 		FROM member_tb as A

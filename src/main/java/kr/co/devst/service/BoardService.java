@@ -15,4 +15,5 @@ public interface BoardService {
 	public int getPageNum(String category);
 	
 	public HashMap<String, String> getBoardOneInfo(BoardVO param);
+	public List<Map<String,String>> getMainBoardList10(String category);
 }
