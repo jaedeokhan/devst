@@ -13,31 +13,30 @@
 		SELECT * FROM board_tb;
 	</select>
 	
-	<select id="getMainBoardList10" resultType="HashMap" parameterType="String">
+	<select id="getMainBoardList10" resultType="HashMap" parameterType="hashMap">
 		SELECT  A.mem_nickname, B.*
 		FROM member_tb as A
 		INNER JOIN board_tb as B
 		ON A.mem_id = B.mem_id
 		
-		<if test="value != null">
-			<choose>
-				<when test='value == "날짜순" '>
-					ORDER BY B.brd_id DESC
-				</when>
-				<when test='value == "인기순" '>
-					ORDER BY B.brd_like_count DESC
-				</when>
-				<when test="value.equals('조회순')">
-					ORDER BY B.brd_view_count DESC
-				</when>
-				<when test="value.equals('댓글순')">
-					ORDER BY B.brd_like_count DESC
-				</when>
-				
-			</choose>
-		</if>
 		
+		<if test="category != null">
+		
+			<trim prefix="ORDER BY" >
+			
+			<choose>
+				<when test="category eq '인기순'.toString()" >B.brd_like_count DESC</when>
+				<when test="category eq '조회순'.toString()">B.brd_view_count DESC</when>
+				<otherwise>
+					B.brd_id DESC	<!--기본은 날짜순  -->
+				</otherwise>
+			</choose>
+			
+			</trim>
 			LIMIT 0,10;
+		</if>
+			
+			
 		
 		
 		
