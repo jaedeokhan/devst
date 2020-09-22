@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.devst.model.BoardVO;
 import kr.co.devst.service.BoardService;
 import kr.co.devst.utils.Utils;
+import net.sf.json.JSONObject;
 
 @Controller
 public class BoardController {
@@ -40,8 +42,10 @@ public class BoardController {
 		log.debug("********* 인덱스 페이지 *********");
 		
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-		list = boardService.getMainBoardList10("날짜순");		
+		Map<String, String> param = new HashMap<String, String>();
+		String category = "조회순";
+		
+		list = boardService.getMainBoardList10(category);		
 		
 		model.addAttribute("boardList",list);
 		
@@ -49,6 +53,29 @@ public class BoardController {
 		
 		return "/index";
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/devst", method = RequestMethod.POST, produces ="application/text; charset=utf8" )
+	public String goIdxAjax(@RequestParam(value = "category", required = false, defaultValue = "날짜순")String category ) {//navigation으로 카테고리르 바꿀때 카드레아웃을 바꿈
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+		list = boardService.getMainBoardList10(category);
+		
+		JSONObject jsonData = new JSONObject();
+	
+		try {
+			jsonData.put("jsonData", list);
+		}catch(Exception e) {
+			System.out.println("error 여기");
+			e.printStackTrace();
+		}
+		
+		
+		return jsonData.toString();
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.GET)

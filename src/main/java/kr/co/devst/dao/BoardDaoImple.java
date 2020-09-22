@@ -77,7 +77,9 @@ public class BoardDaoImple implements BoardDao{
 
 	@Override
 	public List<Map<String, String>> getMainBoardList10(String category) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", category);
 		
-		return sqlSession.selectList(NAME_SPACE+".getMainBoardList10",category);
+		return sqlSession.selectList(NAME_SPACE+".getMainBoardList10",map);
 	}
 }

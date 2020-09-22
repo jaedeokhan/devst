@@ -12,84 +12,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link href="<c:url value="/resources/css/main.css" />"  rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<style>
-	.headerWrap{margin:0 auto; width: 100%; overflow:hidden; background-color:rgba(5,195,157,0.7);}
-	.headerLeft{float:left;}
-	.headerLeft > .headerLeftItems{float:left; color:#fff;font-size: 18px; line-height: 64px; margin: 0 20px 0 20px;}
-	.headerRight{float:right;}
-	.headerRight > .headerRightItems{float:left; color:#fff; font-size: 18px;line-height: 64px;  margin: 0 20px 0 20px;}
-	#logo{width:164px; height: 64px;}
-	.search{float:left; line-height: 64px;}
-	.search.headerRightItems > input{height:26px; width: 200px; margin-right:10px;}
-	.search.headerRightItems > i{cursor:pointer;}
-	
-	.headerLeft > .headerLeftItems:hover{color:yellow;}
-	.headerRight > .headerRightItems:hover{color:yellow;}
-	#header{margin-bottom:100px;}
-	.navWrap{width: 1400px; margin:0 auto; overflow:hidden;}
-	.navItems{width:120px; border: 1px solid #ddd; border-radius: 25px; float:left; height: 50px; line-height: 50px; text-align: center; cursor:pointer; margin: 0 15px; font-weight: bolder;}
-	#nav{margin-bottom:50px;}
-	
-	.mainWrap{overflow: hidden;}
-	.mainItems{float:left; margin:20px; box-shadow: 5px 5px 5px 5px #ddd; cursor: pointer;}
-	 
-	.mainItems:nth-child(5n-4){margin-left: 0;}/*1 6 11 16  */
-	.mainItems:nth-child(5n){margin-right: 0;}
-	.mainWrap{width:1400px; margin:0 auto;}
-	.mainItems{border:1px solid #ddd; width:calc( 1240px / 5 ); box-sizing: border-box;}
-	.mainItemsTitle{text-align: center; font-size: 24px; margin:10px 0;}
-	.mainItemsMid{overflow:hidden;}
-	.mainItemsMidLeft{float:left; width:60%; overflow: hidden;}
-	.mainItmesMidRight{float:right; width: 40%; overflow: hidden;}
-	.mainItemsMid{margin-bottom: 20px; }
-	.mainItmesNm, .mainItmesDate{overflow: hidden;}
-	.mainItmesDate{line-height: 35px;}
-	.mainItmesDate > p{text-align: center;}
-	.mainItmesNm p {line-height: 35px;}
-	.mainItmesNm > *{float:left;  margin:5px 0;}
-	.mainItemsMidLeftTop  *{float:left;}
-	.mainItemsMidLeftBot * {flaot:left;}/*  */
-	.mainItemsMidLeftTop{overflow: hidden; margin-left:10px;}
-	.mainItemsMidLeftBot{overflow: hidden; margin-left:10px;}/*  */
-	.mainItemsMidLeft{overflow: hidden;}
-	.mainItemsMidLeft * {float:left;}
-	.mainItemsDesc{width: 90%; margin:0 auto;}
-	.categoryColorBlue{background-color:rgba(102,141,246,0.7); height: 5px; width: 100%;}
-	.categoryColorGreen{background-color:rgba(5,195,157,0.7); height: 5px; width: 100%;}
-	.mainItemsDescWrap{background-color:#f4f4f4; height: 150px; position: relative;}
-	.mainItemsViews{margin-left:10px; margin-bottom: 10px;}
-	.viewCnt, .goodCnt, .badCnt,.comment{line-height: 35px;}
-	.mainItemsBad{margin-right: 10px;}
-	#main{margin-bottom: 100px;}
-	.mainItemsGood{margin-right: 10px;}
-	.fa-comment, .fa-thumbs-down, .fa-thumbs-up, .fa-eye{font-size: 25px; line-height: 35px;}
-	.fa-thumbs-down{vertical-align: bottom;}
-	.navItems:hover{border-color:rgba(5,195,157,0.7)}
-	.mainItemsComment{margin-right: 10px;}
-	
-	
-	
+<script src="<c:url  value="/resources/js/main.js"/>"></script>
 
-  .mainItemsDesc {
-	position:absolute;
-	left:50%;
-	top:50%;
-	transform:translate(-50%,-50%);
-	display: -webkit-box;
-	word-break:break-all;
-	word-wrap:break-word;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	height:60px;
-	-webkit-line-clamp:3;
-	-webkit-box-orient:vertical;
-	line-height: 1.6em;
-	height: 4.8em			
-
-}
-
-
-</style>
 
 
 
@@ -212,75 +136,10 @@
 	<a href="/devst/board/category?no=3">~~게시판</a>
 	<a href="/devst/board/category?no=4">~~게시판</a>
 	
-	<h1>모든게시물</h1>
-	<table>
-		<tr>
-			<td>게시번호</td>
-			<td>제목</td>
-			<td>해시테그</td>
-			<td>카테고리</td>
-			
-			
-			
-		</tr>
-		<c:forEach var="list" items = "${boardList }" >
-		
-		<tr>
-			<td>${list.brdId }</td>
-			<td>${list.brdTitle }</td>
-			<td>${list.brdHashtag }</td>
-			<td>${list.brdCategory }</td>
-		</tr>
-		
-		</c:forEach>
-	</table>
 	
-	<h1>일반게시물</h1>
 	
-	<table>
-		<tr>
-			<td>게시번호</td>
-			<td>제목</td>
-			<td>해시테그</td>
-			<td>카테고리</td>
-			
-			
-			
-		</tr>
-		<c:forEach var="list" items = "${nomalList }" >
-		
-		<tr>
-			<td>${list.brdId }</td>
-			<td>${list.brdTitle }</td>
-			<td>${list.brdHashtag }</td>
-			<td>${list.brdCategory }</td>
-		</tr>
-		
-		</c:forEach>
-	</table>
+
 	
-	<h1>스터디구인 게시물</h1>
 	
-	<%-- <table>
-		<tr>
-			<td>게시번호</td>
-			<td>제목</td>
-			<td>해시테그</td>
-			<td>카테고리</td>
-			
-			
-			
-		</tr>
-		<c:forEach var="list" items = "${studyList }" >
-		
-		<tr>
-			<td>${list.brdId }</td>
-			<td>${list.brdTitle }</td>
-			<td>${list.brdHashtag }</td>
-			<td>${list.brdCategory }</td>
-		</tr>
-		
-		</c:forEach>
-	</table> --%>
 </body>
 </html>
