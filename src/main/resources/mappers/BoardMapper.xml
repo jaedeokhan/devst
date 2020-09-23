@@ -65,6 +65,16 @@
 		LIMIT #{start}, #{num};
 	</select>
 	
+	<select id="getBoardList" resultType="BoardVO" parameterType="String"><!--일반게시물  -->
+		SELECT  A.mem_nickname,A.mem_username, B.*
+		FROM member_tb as A
+		INNER JOIN board_tb as B
+		ON A.mem_id = B.mem_id
+		WHERE B.brd_category = #{boardName}
+		ORDER BY B.brd_id DESC
+		LIMIT 0, 10;
+	</select>
+	
 	<select id="getPageNum" resultType="java.lang.Integer">
 		SELECT (TRUNCATE(COUNT(*)/10,0)+1) AS cnt FROM board_tb WHERE brd_category = #{brd_category};
 	</select>

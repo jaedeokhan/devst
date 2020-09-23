@@ -13,7 +13,11 @@ public interface BoardService {
 	public List<Map<String, String>> getBoardStudyList(int start, int num);
 	public List<Map<String, String>> getBoardNomalList(int start, int num); 
 	public int getPageNum(String category);
+<<<<<<< Updated upstream
 	
 	public HashMap<String, String> getBoardOneInfo(BoardVO param);
 	public List<Map<String,String>> getMainBoardList10(String category);
+=======
+	public List<BoardVO> getBoardList(String boardName);
+>>>>>>> Stashed changes
 }
