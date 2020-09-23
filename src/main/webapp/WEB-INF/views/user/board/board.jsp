@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -145,15 +144,7 @@
 			<div class="boardItem" onclick="itemDetail(${list.brd_id})">
 			<div class="boardCaterogy">
 			<!-- 에러 발생 :: Cannot convert [20. 9. 12 오후 3:11] of type [class java.sql.Timestamp] to [class java.lang.Long]  -->
-<<<<<<< Updated upstream
  			<c:if test="${list.brd_update_date >= currentTime -1 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
-=======
-<%-- 			<fmt:parseDate var="updateTime_Date" value="${list.brdUpdateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:parseNumber var="updateTime" value="${updateTime_Date}" integerOnly="true"/>
- --%>			<%-- <fmt:parseNumber var="compare2Day" value="172400400" integerOnly="true"/>  --%>
-<%-- 				<p>${updateTime} >= ${currentTime} - 172400400</p> --%>
-			<c:if test="${list.brdUpdateDate >= currentTime - 2 }"><!--날짜비교해서 new 카테고리 addClass할꺼  -->
->>>>>>> Stashed changes
 				<div class="boardNew active">New</div>
 			</c:if> 
 				
@@ -164,11 +155,11 @@
 				<div class="profileWrap">
 					<img src="https://placehold.it/120x120">
 				</div>
-				<p class="itemWriterNm">${list.memNickname }</p>
+				<p class="itemWriterNm">${list.mem_nickname }</p>
 			</div>
 			<div class="itemDesc">
-				<h3 class="itemDescTitle">${list.brdTitle }</h3>
-				<p class="itemDescContent">${list.brdContent }</p>
+				<h3 class="itemDescTitle">${list.brd_title }</h3>
+				<p class="itemDescContent">${list.brd_content }</p>
 				
 				<div class="itemDescBtn">
 					<i class="far fa-thumbs-up">54</i>

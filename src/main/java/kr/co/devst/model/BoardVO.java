@@ -26,20 +26,6 @@ public class BoardVO {
 	private int brdDislikeCount;
 	private String brdCreateDate; // r_dt
 	private String brdUpdateDate; // m_dt
-	private String memUsername;
-	private String memNickname ;
-	public String getMemUsername() {
-		return memUsername;
-	}
-	public void setMemUsername(String memUsername) {
-		this.memUsername = memUsername;
-	}
-	public String getMemNickname() {
-		return memNickname ;
-	}
-	public void setMemNickname(String memNickname ) {
-		this.memNickname  = memNickname ;
-	}
 	public int getBrdId() {
 		return brdId;
 	}
@@ -106,14 +92,7 @@ public class BoardVO {
 	public void setBrdUpdateDate(String brdUpdateDate) {
 		this.brdUpdateDate = brdUpdateDate;
 	}
-	@Override
-	public String toString() {
-		return "BoardVO [brdId=" + brdId + ", brdTitle=" + brdTitle + ", brdContent=" + brdContent + ", brdImage="
-				+ brdImage + ", brdCategory=" + brdCategory + ", brdHashtag=" + brdHashtag + ", brdViewCount="
-				+ brdViewCount + ", brdLikeCount=" + brdLikeCount + ", brdDislikeCount=" + brdDislikeCount
-				+ ", brdCreateDate=" + brdCreateDate + ", brdUpdateDate=" + brdUpdateDate + ", memUsername="
-				+ memUsername + ", memNikcname=" + memNickname  + "]";
-	}
 	
-		
+	
+	
 }

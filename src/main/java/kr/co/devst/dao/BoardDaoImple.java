@@ -68,7 +68,6 @@ public class BoardDaoImple implements BoardDao{
 
 
 	@Override
-<<<<<<< Updated upstream
 	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
 		return sqlSession.selectOne(NAME_SPACE+".getBoardOneInfo",param);
 	}
@@ -80,9 +79,5 @@ public class BoardDaoImple implements BoardDao{
 	public List<Map<String, String>> getMainBoardList10(String category) {
 		
 		return sqlSession.selectList(NAME_SPACE+".getMainBoardList10",category);
-=======
-	public List<BoardVO> getBoardList(String boardName) {
-		return sqlSession.selectList(NAME_SPACE+".getBoardList", boardName);
->>>>>>> Stashed changes
 	}
 }

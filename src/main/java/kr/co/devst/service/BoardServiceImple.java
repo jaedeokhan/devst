@@ -77,7 +77,6 @@ public class BoardServiceImple implements BoardService{
 
 
 	@Override
-<<<<<<< Updated upstream
 	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
 		return boardDao.getBoardOneInfo(param);
 	}
@@ -87,11 +86,6 @@ public class BoardServiceImple implements BoardService{
 	@Override
 	public List<Map<String, String>> getMainBoardList10(String category) {
 		return boardDao.getMainBoardList10(category);
-=======
-	public List<BoardVO> getBoardList(String boardName) {
-		// TODO Auto-generated method stub
-		return  boardDao.getBoardList(boardName);
->>>>>>> Stashed changes
 	}
 
 }

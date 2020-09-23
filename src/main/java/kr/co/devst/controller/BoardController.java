@@ -1,9 +1,9 @@
 package kr.co.devst.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +30,7 @@ import kr.co.devst.utils.Utils;
 @Controller
 public class BoardController {
 	
-<<<<<<< Updated upstream
 	private static final Log log = LogFactory.getLog(BoardController.class);
-=======
-	private static final Logger log = LoggerFactory.getLogger(BoardController.class);
-	private static final String[] boardName= {"일반", "스터디구인"};
->>>>>>> Stashed changes
 	
 	@Autowired
 	private BoardService boardService;
@@ -43,35 +38,11 @@ public class BoardController {
 	@RequestMapping(value = "/devst", method = RequestMethod.GET)
 	public String goIdx(Model model) {
 		log.debug("********* 인덱스 페이지 *********");
-<<<<<<< Updated upstream
 		
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 
 		list = boardService.getMainBoardList10("날짜순");		
 		
-=======
-		List<BoardVO> list = new ArrayList<BoardVO>();
-//		List<Map<String, String>> nomalList = new ArrayList<Map<String, String>>();
-		List<BoardVO> nomalList = new ArrayList<BoardVO>();
-		List<BoardVO> studyList = new ArrayList<BoardVO>();
-//		List<BoardVO> nomalList = new ArrayList<BoardVO>();
-//		List<BoardVO> studyList = new ArrayList<BoardVO>();
-		list = boardService.getBoardListAll();		
-//		nomalList = boardService.getBoardNomalList(0, 10);
-//		studyList = boardService.getBoardStudyList(0, 10);
-		nomalList = boardService.getBoardList(boardName[0]);
-		studyList = boardService.getBoardList(boardName[1]);
-		// nonalList 제대로 넘어오는지 확인해보기
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("<" + (i + 1) + "> list 목록 == "+ list.get(i).toString());
-		}
-		for (int i = 0; i < nomalList.size(); i++) {
-			System.out.println("<" + (i + 1) + "> nomalList 목록 == "+ nomalList.get(i).toString());
-		}
-		for (int i = 0; i < studyList.size(); i++) {
-			System.out.println("<" + (i + 1) + "> studyList 목록 == "+ studyList.get(i).toString());
-		}
->>>>>>> Stashed changes
 		model.addAttribute("boardList",list);
 		
 		
@@ -120,42 +91,27 @@ public class BoardController {
 	public String goBoardShow(Model model,@RequestParam(value = "pageNum",required = false, defaultValue = "1")int pageNum,
 											@RequestParam(value = "no", required = false, defaultValue = "0")int no, RedirectAttributes rtta) {
 		log.debug("********* 게시판 각각 세부사항 페이지  *********");
-		/*
-		 * List<Map<String, String>> list = new ArrayList<Map<String, String>>(); //어떤
-		 * 게시물을 담을 그릇
-		 */		
-		List<BoardVO> list = new ArrayList<BoardVO>();
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>(); //어떤 게시물을 담을 그릇
 		String category = null;
 		Integer pageMaxNum = null;
 		String currentTime = Utils.getCurrentDate("yyyyMMdd");
 		System.out.println("pageNum : "+pageNum);
 		
 		
-		System.out.println(currentTime);
 			switch(no) {
 			case 0://잘못된 접근 메인으로
 				return "redirect:/devst/";
 				
 			case 1://일반게시판
-<<<<<<< Updated upstream
 				list = boardService.getBoardNomalList((pageNum-1)*10, 10);
 				pageMaxNum = boardService.getPageNum("일반");
-=======
-				list = boardService.getBoardList(boardName[0]);
-				pageNum = boardService.getPageNum("일반");
->>>>>>> Stashed changes
 				
 				category = "일반게시판";
 				break;
 			case 2://스터디게시판
 				
-<<<<<<< Updated upstream
 				list = boardService.getBoardStudyList((pageNum-1)*10, 10);
 				pageMaxNum = boardService.getPageNum("스터디구인");
-=======
-				list = boardService.getBoardList(boardName[1]);
-				pageNum = boardService.getPageNum("스터디구인");
->>>>>>> Stashed changes
 				category = "스터디게시판";
 				break;
 			case 3://???
