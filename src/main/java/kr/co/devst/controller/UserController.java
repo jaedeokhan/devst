@@ -115,19 +115,22 @@ public class UserController {
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String goLogin(Model model) {
 		log.debug("********** 로그인 페이지 **********");
-		return "/user/login";
+		return "/user/loginPage";
 	}
 	
 	// 로그인
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public int doLogin(Model model, UserVO userVO) throws Exception{
-		log.debug("********* 로그인 @실행@ **********");
-		
-		return 1;
+	/*
+	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public int
+	 * doLogin(Model model, UserVO userVO) throws Exception{
+	 * log.debug("********* 로그인 @실행@ **********");
+	 * 
+	 * return 1; }
+	 */
+	
+	// 로그인 권한 실패 403 => user 가 admin에 접근하면 띄워주는 화면
+	@RequestMapping(value="access_denied_page", method=RequestMethod.GET)
+	public String goAccessDeined() {
+		return "/access_denied_page";
 	}
-	
-
-	
-	
 
 }
