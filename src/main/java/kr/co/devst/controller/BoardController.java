@@ -43,7 +43,7 @@ public class BoardController {
 		
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> param = new HashMap<String, String>();
-		String category = "조회순";
+		String category = "인기순";
 		
 		list = boardService.getMainBoardList10(category);		
 		
@@ -57,20 +57,20 @@ public class BoardController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/devst", method = RequestMethod.POST, produces ="application/text; charset=utf8" )
+	@RequestMapping(value = "/devst/ajax", method = RequestMethod.GET, produces ="application/text; charset=utf8" )
 	public String goIdxAjax(@RequestParam(value = "category", required = false, defaultValue = "날짜순")String category ) {//navigation으로 카테고리르 바꿀때 카드레아웃을 바꿈
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+		System.out.println("category : "+category);
 		list = boardService.getMainBoardList10(category);
 		
 		JSONObject jsonData = new JSONObject();
 	
-		try {
-			jsonData.put("jsonData", list);
-		}catch(Exception e) {
-			System.out.println("error 여기");
-			e.printStackTrace();
-		}
 		
+		jsonData.put("jsonData", list);
+		
+		
+		
+		System.out.println(jsonData.toString());
 		
 		return jsonData.toString();
 	}
