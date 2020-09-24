@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link href="<c:url value="/resources/css/main.css" />"  rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="<c:url  value="/resources/js/main.js"/>"></script>
+<script src="/resources/js/main.js"/></script>
 
 
 
@@ -84,10 +84,6 @@
 				<h3 class="mainItemsTitle">${list.brd_title }</h3>
 				<div class="mainItemsMid">
 					<div class="mainItemsMidLeft">
-					<!--  -->
-				
-					<!--  -->
-						
 						<div class="mainItemsMidLeftTop">
 							<div class="mainItemsGood"><i class="far fa-thumbs-up"></i><p class="goodCnt">${list.brd_like_count }</p></div>
 							
@@ -99,7 +95,7 @@
 					</div>
 					<div class="mainItmesMidRight">
 						<div class="mainItmesNm"><img src="https://placehold.it/35x35"><p>닉네임</p></div>
-						<div class="mainItmesDate"><p>20/09/12</p></div>
+						<div class="mainItmesDate"><p>${list.brd_update_date }</p></div>
 					</div>
 				</div>
 				<div class="mainItemsDescWrap">

@@ -54,7 +54,9 @@
 	.mainItemsComment{margin-right: 10px;}
 	
 	
-	
+	.mainItmesNm p{
+		width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+	}	
 
   .mainItemsDesc {
 	position:absolute;
