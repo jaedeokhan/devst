@@ -1,21 +1,18 @@
-//es5
 
 
 
-
-
-
-
-
-
-
-
-
-
-//jquery
 $(function(){
+	
+	$(".navItems").eq(0).addClass('active');
+	
+	
+	
+	
 	$(document).on('click', '.navItems', function(){
-		var category = $(this).text();		
+		var category = $(this).text();
+		var idx = $(this).index();
+				$('.navItems').removeClass('active');
+				$(".navItems").eq(idx).addClass('active');
 		//alert(category)
 		$.ajax({
 			url:'/devst/ajax?category='+category,
@@ -23,6 +20,9 @@ $(function(){
 			dataType:'json',
 			
 			success:function(data){
+				
+				
+				
 				var categoryColorBlue = '<div class="categoryColorBlue"></div>';
 				//console.log(data.jsonData)
 				$('.mainItems').remove();

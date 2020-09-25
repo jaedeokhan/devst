@@ -43,7 +43,7 @@ public class BoardController {
 		
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> param = new HashMap<String, String>();
-		String category = "인기순";
+		String category = "날짜순";
 		
 		list = boardService.getMainBoardList10(category);		
 		
@@ -51,7 +51,7 @@ public class BoardController {
 		
 		
 		
-		return "/index";
+		return "/index.tilesAll";
 	}
 	
 	
@@ -81,7 +81,7 @@ public class BoardController {
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.GET)
 	public String goBoardRegMod(Model model) {
 		log.debug("********* 게시판 작성 페이지  *********");
-		return "/user/board/regMod";
+		return "/user/board/regMod.tilesAll";
 	}
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.POST)
