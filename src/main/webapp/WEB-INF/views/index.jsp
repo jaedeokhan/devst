@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>    
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>devst</title>
 <link href="<c:url value="/resources/css/reset.css" />"  rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <link href="<c:url value="/resources/css/main.css" />"  rel="stylesheet">
@@ -20,7 +20,7 @@
 
 </head>
 <body>
-	<header id="header">
+	<%-- <header id="header">
 		<div class="headerWrap">
 			
 			<div class="headerLeft">
@@ -49,7 +49,7 @@
 			</div>
 			</sec:authorize>
 		</div>
-	</header>
+	</header> --%>
 	<nav id="nav">
 		<ul class="navWrap">
 			<li class="navItems">날짜순</li>
@@ -134,14 +134,6 @@
 		</div>
 	</main>
 
-
-
-
-	<a href="/devst/board/category?no=1">일반게시판</a>
-	<a href="/devst/board/category?no=2">스터디게시판</a>
-	<a href="/devst/board/category?no=3">~~게시판</a>
-	<a href="/devst/board/category?no=4">~~게시판</a>
-	
 	
 	
 

@@ -51,6 +51,7 @@
 	.fa-comment, .fa-thumbs-down, .fa-thumbs-up, .fa-eye{font-size: 25px; line-height: 35px;}
 	.fa-thumbs-down{vertical-align: bottom;}
 	.navItems:hover{border-color:rgba(5,195,157,0.7)}
+	.navItems.active{border-color:rgba(5,195,157,0.7) }
 	.mainItemsComment{margin-right: 10px;}
 	
 	
