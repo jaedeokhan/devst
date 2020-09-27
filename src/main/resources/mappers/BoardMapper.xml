@@ -13,9 +13,39 @@
 		SELECT * FROM board_tb;
 	</select>
 	
-	<select id="getBoardStudyList" resultType="HashMap" parameterType="hashMap"><!--스터디구인게시물  -->
+	<select id="getMainBoardList10" resultType="HashMap" parameterType="hashMap">
+		SELECT  A.mem_nickname, B.*
+		FROM member_tb as A
+		INNER JOIN board_tb as B
+		ON A.mem_id = B.mem_id
+		
+		
+		<if test="category != null">
+		
+			<trim prefix="ORDER BY" >
+			
+			<choose>
+				<when test="category eq '인기순'.toString()" >B.brd_like_count DESC</when>
+				<when test="category eq '조회순'.toString()">B.brd_view_count DESC</when>
+				<otherwise>
+					B.brd_id DESC	<!--기본은 날짜순  -->
+				</otherwise>
+			</choose>
+			
+			</trim>
+			LIMIT 0,10;
+		</if>
+			
+			
+		
+		
+		
+		
+	</select>
+	
+	<select id="getBoardStudyList" resultType="HashMap" parameterType="hashMap" ><!--스터디구인게시물  -->
 		<!-- SELECT * FROM t_board where category='스터디구인' order by board_pk desc limit #{start}, #{num}; -->
-		SELECT  A.mem_nickname,A.mem_username, B.*
+		SELECT  A.mem_nickname, B.*
 		FROM member_tb as A
 		INNER JOIN board_tb as B
 		ON A.mem_id = B.mem_id
@@ -25,7 +55,7 @@
 	</select>
 	
 	<select id="getBoardNomalList" resultType="HashMap" parameterType="hashMap"><!--일반게시물  -->
-		SELECT  A.mem_nickname,A.mem_username, B.*
+		SELECT  A.mem_nickname, B.*
 		FROM member_tb as A
 		INNER JOIN board_tb as B
 		ON A.mem_id = B.mem_id
@@ -39,7 +69,7 @@
 	</select>
 	
 	<select id="getBoardOneInfo" resultType="hashMap">
-		SELECT  A.mem_nickname,A.mem_username, B.*
+		SELECT  A.mem_nickname, B.*
 		FROM member_tb as A
 		INNER JOIN board_tb as B
 		ON A.mem_id = B.mem_id

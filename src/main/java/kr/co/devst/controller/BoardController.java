@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.devst.model.BoardVO;
 import kr.co.devst.service.BoardService;
 import kr.co.devst.utils.Utils;
+import net.sf.json.JSONObject;
 
 @Controller
 public class BoardController {
@@ -38,27 +40,48 @@ public class BoardController {
 	@RequestMapping(value = "/devst", method = RequestMethod.GET)
 	public String goIdx(Model model) {
 		log.debug("********* 인덱스 페이지 *********");
-		List<BoardVO> list = new ArrayList<BoardVO>();
-		List<Map<String, String>> nomalList = new ArrayList<Map<String, String>>();
-		List<Map<String, String>> studyList = new ArrayList<Map<String, String>>();
-//		List<BoardVO> nomalList = new ArrayList<BoardVO>();
-//		List<BoardVO> studyList = new ArrayList<BoardVO>();
-		list = boardService.getBoardListAll();		
-		nomalList = boardService.getBoardNomalList(0, 10);
-		studyList = boardService.getBoardStudyList(0, 10);
+		
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		Map<String, String> param = new HashMap<String, String>();
+		String category = "날짜순";
+		
+		list = boardService.getMainBoardList10(category);		
+		
 		model.addAttribute("boardList",list);
-		model.addAttribute("nomalList",nomalList);
-		model.addAttribute("studyList",studyList);
 		
 		
-		return "/index";
+		
+		return "/index.tilesAll";
 	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/devst/ajax", method = RequestMethod.GET, produces ="application/text; charset=utf8" )
+	public String goIdxAjax(@RequestParam(value = "category", required = false, defaultValue = "날짜순")String category ) {//navigation으로 카테고리르 바꿀때 카드레아웃을 바꿈
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+		System.out.println("category : "+category);
+		list = boardService.getMainBoardList10(category);
+		
+		JSONObject jsonData = new JSONObject();
+	
+		
+		jsonData.put("jsonData", list);
+		
+		
+		
+		System.out.println(jsonData.toString());
+		
+		return jsonData.toString();
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.GET)
 	public String goBoardRegMod(Model model) {
 		log.debug("********* 게시판 작성 페이지  *********");
-		return "/user/board/regMod";
+		return "/user/board/regMod.tilesAll";
 	}
 	
 	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.POST)

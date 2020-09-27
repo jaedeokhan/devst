@@ -45,8 +45,7 @@ public class MailServiceImple implements MailService{
             mailHandler.setFrom(setfrom); // 보내는사람 생략X
             mailHandler.setTo(tomail); // 받는사람 이메일
             mailHandler.setSubject(title); // 메일제목은 생략 가능
-            mailHandler.setText(content); // 메일 내용
-          
+            mailHandler.setText(content); // 메일 내용     
             mailHandler.send();
             
             session.setAttribute(memEmail, certificationNum);
