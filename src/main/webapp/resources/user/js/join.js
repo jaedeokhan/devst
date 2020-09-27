@@ -1,7 +1,7 @@
 // 회원가입 유효성 검사
 function joinChk() {
 	var frm = document.memberJoinForm;
-	var pwRule = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/; //조건1. 6~20 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
+	var pwRule = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,16}$/; //조건1. 6~20 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
 
 	if (frm.mem_email.value.length == 0) {
 		alert("이메일을 입력하세요.");
@@ -12,7 +12,7 @@ function joinChk() {
 		frm.mem_password.focus();
 		return false;
 	} else if (!pwRule.test(frm.mem_password.value)) {
-		alert("패스워드는 숫자, 문자포함 6~12자리로 지정해주세요");
+		alert("패스워드는 숫자, 문자포함 6~16자리로 지정해주세요");
 		return false;
 	} else if (frm.mem_username.value.length == 0) {
 		alert("이름을 입력하세요.")
