@@ -85,7 +85,18 @@ public class BoardServiceImple implements BoardService{
 
 	@Override
 	public List<Map<String, String>> getMainBoardList10(String category) {
-		return boardDao.getMainBoardList10(category);
+		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+		list = boardDao.getMainBoardList10(category);
+	
+		for(int i=0;i<list.size();i++) {
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			String date = transFormat.format(list.get(i).get("brd_update_date"));
+			list.get(i).put("brd_update_date", date);
+
+		}
+		
+		
+		return list;
 	}
 
 }
