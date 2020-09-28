@@ -19,9 +19,7 @@ public class AdminController {
 	
 	@Autowired private AdminService adminService;
 	 
-	
-	// 
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@RequestMapping(value="/page", method = RequestMethod.GET)
 	public ModelAndView goAdminPage(ModelAndView mav) {
 		
 		int userCount = adminService.getUserCount();

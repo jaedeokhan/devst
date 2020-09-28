@@ -1,8 +1,15 @@
 package kr.co.devst.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class UserVO {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+@SuppressWarnings("serial") 
+public class UserVO implements UserDetails {
 	private int memId;
 	private String memEmail;
 	private String memPassword;
@@ -12,6 +19,39 @@ public class UserVO {
 	private Date memSingupDate;
 	private Date memSigninDate;
 	private String memProfileImage;
+	private String memAuthority;
+	private boolean memEnabled;
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		ArrayList<GrantedAuthority> auth = new ArrayList<GrantedAuthority>();
+		auth.add(new SimpleGrantedAuthority(memAuthority));
+		return auth;
+	}
+	@Override
+	public String getPassword() {
+		return memPassword;
+	}
+	@Override
+	public String getUsername() {
+		return memNickname;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		return memEnabled;
+	}
 	
 	public int getMemId() {
 		return memId;
@@ -71,6 +111,8 @@ public class UserVO {
 	public String toString() {
 		return "UserVO [memId=" + memId + ", memEmail=" + memEmail + ", memPassword=" + memPassword + ", memUsername="
 				+ memUsername + ", memNickname=" + memNickname + ", memGrade=" + memGrade + ", memSingupDate="
-				+ memSingupDate + ", memSigninDate=" + memSigninDate + ", memProfileImage=" + memProfileImage + "]";
+				+ memSingupDate + ", memSigninDate=" + memSigninDate + ", memProfileImage=" + memProfileImage
+				+ ", memAuthority=" + memAuthority + ", memEnabled=" + memEnabled + "]";
 	}
+	
 }
