@@ -1,6 +1,7 @@
 package kr.co.devst.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.co.devst.dao.UserDao;
@@ -12,6 +13,9 @@ public class UserServiceImple implements UserService{
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private BCryptPasswordEncoder pwEncoder;
 
 	// 이메일 중복체크
 	@Override
@@ -30,6 +34,8 @@ public class UserServiceImple implements UserService{
 	// 회원가입
 	@Override
 	public int doJoin(UserVO userVO) throws Exception {
+		// 사용자가 입력한 비밀번호 암호화
+		userVO.setMemPassword(pwEncoder.encode(userVO.getMemPassword()));
 		return userDao.doJoin(userVO);
 	}
 
