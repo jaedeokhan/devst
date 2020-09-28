@@ -15,9 +15,6 @@
 <script src="/resources/js/main.js"/></script>
 
 
-
-
-
 </head>
 <body>
 	<%-- <header id="header">

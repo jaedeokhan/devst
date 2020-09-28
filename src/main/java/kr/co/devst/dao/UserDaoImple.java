@@ -24,7 +24,7 @@ public class UserDaoImple implements UserDao{
 	// 닉네임 중복확인
 	@Override
 	public int nickNameChk(String memNickName) {
-		int result = sqlSession.selectOne(NAME_SPACE+ ".emailChk", memNickName);
+		int result = sqlSession.selectOne(NAME_SPACE+ ".nickNameChk", memNickName);
 		return result;
 	}
 

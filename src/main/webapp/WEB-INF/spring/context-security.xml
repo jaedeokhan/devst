@@ -31,7 +31,7 @@
             />
         </http>
 
-        <authentication-manager>
+        <authentication-manager> <!-- provider의 부모 - 인터페이스 -->
             <authentication-provider user-service-ref="userService">
             </authentication-provider>
         </authentication-manager>
