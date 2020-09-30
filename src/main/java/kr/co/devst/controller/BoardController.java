@@ -57,7 +57,7 @@ public class BoardController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/devst/ajax", method = RequestMethod.GET, produces ="application/text; charset=utf8" )
+	@RequestMapping(value = "/devst", method = RequestMethod.POST, produces ="application/text; charset=utf8" )
 	public String goIdxAjax(@RequestParam(value = "category", required = false, defaultValue = "날짜순")String category ) {//navigation으로 카테고리르 바꿀때 카드레아웃을 바꿈
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 		System.out.println("category : "+category);

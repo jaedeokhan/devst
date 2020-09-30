@@ -14,10 +14,15 @@ $(function(){
 				$('.navItems').removeClass('active');
 				$(".navItems").eq(idx).addClass('active');
 		//alert(category)
+		 	var header = $("meta[name='_csrf_header']").attr("content");
+        	var token = $("meta[name='_csrf']").attr("content");
 		$.ajax({
-			url:'/devst/ajax?category='+category,
-			type:'get',
+			url:'/devst?category='+category,
+			type:'post',
 			dataType:'json',
+			beforeSend: function(xhr){
+				xhr.setRequestHeader(header, token);	// 헤드의 csrf meta태그를 읽어 CSRF 토큰 함께 전송
+			},
 			
 			success:function(data){
 				
