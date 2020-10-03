@@ -5,13 +5,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import kr.co.devst.dao.SecurityUserAuthDAO;
 import kr.co.devst.dao.SecurityUserAuthDAOImpl;
 import kr.co.devst.model.UserVO;
 
 public class SecurityUserDetailService implements UserDetailsService{
 
 	@Autowired
-	private SecurityUserAuthDAOImpl securityUserAuthDAO;
+	private SecurityUserAuthDAO securityUserAuthDAO;
 	
 	@Override
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {

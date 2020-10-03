@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.devst.model.UserVO;
 
 @Repository
-public class SecurityUserAuthDAOImpl {
+public class SecurityUserAuthDAOImpl implements SecurityUserAuthDAO{
 	
 	@Autowired
 	private SqlSession sqlSession;

@@ -1,6 +1,10 @@
 package kr.co.devst.dao;
 
+import kr.co.devst.model.UserVO;
+
 public interface SecurityUserAuthDAO {
+	
+	UserVO getUserById(String memEmail);
 	
 	void updateFailureCount(String memEmail);
 	
@@ -11,4 +15,5 @@ public interface SecurityUserAuthDAO {
 	void updateFailureCountReset(String memEmail);
 	
 	void updateNewAccessDate(String memEmail);
+
 }
