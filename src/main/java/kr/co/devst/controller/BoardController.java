@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,12 +97,19 @@ public class BoardController {
 		RequestDispatcher rd =  request.getRequestDispatcher("/WEB-INF/views/user/board/regMod.jsp");
 		UserVO loginUser = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if(bindReulst.hasErrors() || loginUser == null) {//클라이언트 전송에러 or 비로그인자가 글 쓰기한경우
-			request.setAttribute("msg", "글 쓰기에 실패했습니다.");
+			List<ObjectError> list =  bindReulst.getAllErrors();
+			String msg = "글 쓰기에 실패했습니다";
+            for(ObjectError e : list) {
+            	msg+="\n"+e.getDefaultMessage();
+                 System.out.println("error : "+e.getDefaultMessage());
+            }
+			
+			request.setAttribute("msg", msg);
 			rd.forward(request, response);
 			return;
 		}
 		
-		
+		System.out.println("여기지남");
 		
 		String dbFileNm =  Utils.uploadFile(multiFile, request,Utils.parseToStr(loginUser.getMemId(),"15"));//에러시 15관리자 폴더에 저장
 		param.setBrdImage(dbFileNm);
