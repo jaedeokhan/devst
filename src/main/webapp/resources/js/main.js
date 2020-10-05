@@ -23,7 +23,7 @@ console.log(no)
 /*jQuery*/
 $(function(){
 	$('#user_info').click(function(){
-		
+		$('#certified').load("/certified")
 	})
 	
 	
