@@ -21,12 +21,16 @@
 <script src="/resources/js/main.js"/></script>
 
 
-
+<sec:authentication property="principal" var="loginUser"/>
 
 
 </head>
 <body>
+dd : ${loginUser }
 
+ <%-- dd : ${loginUserSec }<br>
+ dd : ${loginUser }<br>
+id : ${loginUser.memEmail } --%>
 
 
 
@@ -85,7 +89,7 @@
 		
 		</c:forEach>  -->
 			<c:forEach  var="list" items = "${boardList }" >
-			<div class="mainItems">
+			<div class="mainItems" onclick="boardDetailOne(${list.brd_id}, '${list.brd_category }')">
 				<c:if test="${list.brd_category eq '일반'}">
 					<div class="categoryColorBlue"></div>
 				</c:if>
@@ -101,7 +105,7 @@
 						</div>
 						<div class="mainItemsMidLeftBot">
 							<div class="mainItemsComment"><i class="far fa-comment"></i><p class="comment">10</p></div>
-							<div class="mainItemsBad"><i class="fas fa-eye"></i><p class="viewCnt">15</p></div>
+							<div class="mainItemsBad"><i class="fas fa-eye"></i><p class="viewCnt">${list.brd_view_count }</p></div>
 						</div>
 					</div>
 					<div class="mainItmesMidRight">

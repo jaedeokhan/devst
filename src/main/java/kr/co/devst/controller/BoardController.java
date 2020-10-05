@@ -1,11 +1,15 @@
 package kr.co.devst.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -13,6 +17,8 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.devst.model.BoardVO;
+import kr.co.devst.model.UserVO;
 import kr.co.devst.service.BoardService;
 import kr.co.devst.utils.Utils;
 import net.sf.json.JSONObject;
@@ -84,24 +90,33 @@ public class BoardController {
 		return "/user/board/regMod.tilesAll";
 	}
 	
-	@RequestMapping(value = "/devst/board/regmod", method = RequestMethod.POST)
-	public void doBoardRegMod(Model model, HttpServletRequest request,@Valid BoardVO param, BindingResult bindReulst ,HttpServletResponse response,MultipartHttpServletRequest multi, @RequestParam(value = "multiFile")MultipartFile multiFile) throws Exception{
+	@RequestMapping(value = "/devst/board/regmod",headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+	public void doBoardRegMod(Model model, HttpServletRequest request,@Valid BoardVO param, BindingResult bindReulst ,HttpServletResponse response, @RequestParam(value = "multiFile")MultipartFile multiFile, Principal principal, Authentication authentication) throws Exception{
 		log.debug("********* 게시판 작성 @@실행@@  *********");
 		RequestDispatcher rd =  request.getRequestDispatcher("/WEB-INF/views/user/board/regMod.jsp");
-		if(bindReulst.hasErrors()) {//클라이언트 전송에러
+		UserVO loginUser = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(bindReulst.hasErrors() || loginUser == null) {//클라이언트 전송에러 or 비로그인자가 글 쓰기한경우
 			request.setAttribute("msg", "글 쓰기에 실패했습니다.");
 			rd.forward(request, response);
 			return;
 		}
 		
 		
-		String dbFileNm =  Utils.uploadFile(multiFile, request,"12");//하드코딩된 부분, USER테이블과 조인시 동적으로할당하자
+		
+		String dbFileNm =  Utils.uploadFile(multiFile, request,Utils.parseToStr(loginUser.getMemId(),"15"));//에러시 15관리자 폴더에 저장
 		param.setBrdImage(dbFileNm);
 		
 		
 		Map<String,String> map = new HashMap<String, String>();
 		map = Utils.ObjToMap(param);
-		map.put("memId", "11");
+		log.debug("로그인정보 :::::"+principal.getName());	
+	
+		
+		
+
+		
+		
+		map.put("memId", Utils.parseToStr(loginUser.getMemId(),"15"));
 			
 		
 		int result = boardService.doWrite(map);
@@ -112,6 +127,48 @@ public class BoardController {
 			return;
 		}
 		response.sendRedirect("/devst/");
+	}
+	
+	//게시물 수정
+	@RequestMapping(value = "/devst/board/detail/update", method = RequestMethod.POST) 
+	public void goBoardModify(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws IOException, ServletException {
+		String id = request.getParameter("id");//게시물번호
+		String no = request.getParameter("no");//게시물 카테고리
+		String memId = request.getParameter("memId");
+		log.debug("게시물번호id :::: "+id);
+		log.debug("카테고리no :::: "+no);
+		log.debug("게시물 정보 카테고리:::: "+vo.getBrdCategory());
+		log.debug("게시물 정보 내용:::: "+vo.getBrdContent());
+		log.debug("게시물 정보 제목:::: "+vo.getBrdTitle());
+		
+		vo.setMemId(Utils.parseToInt(memId, 10));
+		vo.setBrdId(Utils.parseToInt(id, 0));
+		
+		
+		if(id == null || no == null || ("1").equals(no) && ("2").equals(no)) {//비정상적인 경로로 접근 한 경우
+			response.sendRedirect("/");
+			return;
+		}
+		
+		
+		int result = boardService.boardModify(vo);
+		if(result != 1) {//수정실패
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter writer = response.getWriter();
+			writer.print("<script>");
+			writer.print("alert('수정에 실패했습니다.');");
+			writer.print("history.back()");
+			writer.print("</script>");
+			return;
+		}
+		
+		response.sendRedirect("/devst/board/detail/category?id="+id+"&no="+no);
+		
+		return;
+		
+		
+		
 	}
 	
 	@RequestMapping(value = "/devst/board/category", method = RequestMethod.GET)
@@ -131,14 +188,14 @@ public class BoardController {
 				
 			case 1://일반게시판
 				list = boardService.getBoardNomalList((pageNum-1)*10, 10);
-				pageMaxNum = boardService.getPageNum("일반");
+				pageMaxNum = boardService.boardMaxPageNum("일반");
 				
 				category = "일반게시판";
 				break;
 			case 2://스터디게시판
 				
 				list = boardService.getBoardStudyList((pageNum-1)*10, 10);
-				pageMaxNum = boardService.getPageNum("스터디구인");
+				pageMaxNum = boardService.boardMaxPageNum("스터디구인");
 				category = "스터디게시판";
 				break;
 			case 3://???
@@ -160,10 +217,10 @@ public class BoardController {
 		model.addAttribute("pageNum",pageNum);//현재 페이지쪽수(시작이 0)	
 		model.addAttribute("no",no);//URL에 들어가는 카테고리 
 		model.addAttribute("category",category);//게시판에 들어갈 카테고리명
-		model.addAttribute("pageMaxNum",20);//최대 페이지 수
+		model.addAttribute("pageMaxNum",pageMaxNum);//최대 페이지 수
 		model.addAttribute("list",list);
 		model.addAttribute("currentTime",currentTime);
-		return "/user/board/board";
+		return "/user/board/board.tilesAll";
 	}
 	
 	
@@ -173,7 +230,7 @@ public class BoardController {
 	  @RequestMapping(value = "/devst/board/detail/category", method = RequestMethod.GET)
 	  public String goBoardDetail(Model model, @RequestParam(value = "id", required = false, defaultValue = "0")int id,
 			  									@RequestParam(value = "no", required = false, defaultValue = "0")int no ){
-		  
+		  log.debug("no :::::: "+no);
 		  	BoardVO param = new BoardVO();
 		  
 		  if(id == 0 || no == 0) {//올바르진 않은 접근
@@ -182,17 +239,22 @@ public class BoardController {
 		  param = new BoardVO(); param.setBrdId(id);
 		  param.setBrdCategory(Utils.MappingCategory(no));
 		  
+		  //param.setBrdId(1000);//게시물 번호가 1000번인 게시물은 없다 작업실패
+		  
+		  
 		  HashMap<String, String> boardOneInfoMap = boardService.getBoardOneInfo(param);
 		  
 		  if(boardOneInfoMap == null) {//잘못된 접근 
-			  return "/devst/board/category?no="+no; 
+			  return "/"; 
 		  } 
 		  model.addAttribute("oneInfo",boardOneInfoMap);
+		  
 	  
 	  
-	  
-		  return "/user/board/boardDetail"; 
+		  return "/user/board/regMod.tilesAll"; 
 	  }
+	  
+	  
 	 
 	
 	

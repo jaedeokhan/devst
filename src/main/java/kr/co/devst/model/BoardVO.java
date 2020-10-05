@@ -17,7 +17,6 @@ public class BoardVO {
 	
 	@NotEmpty(message = "내용을 입력해주세요")
 	private String brdContent;
-	
 	private String brdImage;
 	private String brdCategory;
 	private String brdHashtag;
@@ -26,6 +25,19 @@ public class BoardVO {
 	private int brdDislikeCount;
 	private String brdCreateDate; // r_dt
 	private String brdUpdateDate; // m_dt
+	private int memId;//user_tb fk
+	
+	
+	
+	
+	
+	
+	public int getMemId() {
+		return memId;
+	}
+	public void setMemId(int memId) {
+		this.memId = memId;
+	}
 	public int getBrdId() {
 		return brdId;
 	}

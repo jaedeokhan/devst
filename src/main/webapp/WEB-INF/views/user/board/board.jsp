@@ -15,16 +15,17 @@
 	.boardItem{width:100%; height:120px; border:1px solid #ddd; position:relative; margin:20px;}
 	.boardCategoryNm{font-size:24px;}
 	.itemDesc{width:50%; heght:100%;  padding-top:30px; text-align:center;}
-	.itemDescTitle{margin:5px 0; font-size:18px;}
-	.itemDescDate, .itemDescWriter, .itemDescDate, .itemDescContent{font-size:12px;}
-	.itemDescContent{margin-top:10px;}
+	.itemDescTitle{margin:5px 0; font-size:18px;  text-align: left; margin-left: 150px; width:250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+	.itemDescDate, .itemDescWriter, .itemDescDate, .itemDescContent{font-size:12px; overflow:hidden; vertical-align:top; text-overflow: ellipsis; word-break:break-all; -webkit-box-orient:vertical; display: -webkit-box;  -webkit-line-clamp:2}
+	.itemDescContent{margin-top:10px; text-align: left; margin-left: 150px;}
 	.itemDescBtn{position:absolute; right:0; bottom:0;}
+	.itemDescBtn i{font-size:20px;}
 	.itemDescInfo{margin: 15px 0 0 0;}
 	.boardItem > *{float:left;}
 	.boardItem{overflow:hidden;}
 	.profileWrap{width:100px; height:100px; overflow:hidden; border-radius:25px;}
 	.profileWrap > img{  width: 100%; height: 100%; object-fit: cover;}
-	.itemWriterNm{text-align:center; margin-top:3px; height:18px; line-height: 18px;}
+	.itemWriterNm{text-align:center; margin-top:3px; height:18px; line-height: 18px; width:100px;overflow:hidden; text-overflow: ellipsis; white-space:nowrap;}
 	.boardCaterogy{width:80px; height:40px;  float:right;}
 	.boardNew, .boardBest{float:right; width:40px; height:40px; display:none;}
 	.boardNew.active{background-color:#FF4646; color:#fff; line-height: 40px; text-align: center; display:block;}
@@ -37,6 +38,8 @@
 	.pageArrow{width:500px; height:53px; position:absolute; left:50%; transform:translateX(-50%); }
 	.pageArrow  i{line-height: 53px; font-size:28px; cursor:pointer; position:relative; bottom:53px; color:#666}
 	.pageLeftArrow{float:left;}
+	.pageArrow i {top:-36px;}
+
 	.pageRightArrow{float:right;}
 	.pageNav{position:relative;}
 	.fas.fa-arrow-right{padding-right:24px;}
@@ -47,9 +50,11 @@
 <script>
 	$(function(){
 		var pageMaxNum = $("#pageMaxNum").val();//최대페이지수
+		if(pageMaxNum < 5) {pageMaxNum = 5;}//레이아웃용
 		var currentPageNum = $('#pageNum').val();//현재페이지
 		var pageNumWidth = $('.pageNum').width();
 		 $(".pageNumBox").css({
+			 
 			width:pageMaxNum*pageNumWidth+"px"
 		}); 
 		$(".pageNumWrap")
@@ -88,7 +93,6 @@
 			
 		}
 		
-		
 		$(".boardItem").mouseover(function(){
 			$(".itemWriterInfo").css({
 				backgroundColor:"#fff"
@@ -96,6 +100,9 @@
 		})
 		
 		$(".pageLeftArrow").click(function(){
+			if(currentPageNum==1){
+				return;
+			}
 			pageChange(--currentPageNum);
 		})
 		
@@ -162,8 +169,8 @@
 				<p class="itemDescContent">${list.brd_content }</p>
 				
 				<div class="itemDescBtn">
-					<i class="far fa-thumbs-up">54</i>
-					<i class="far fa-thumbs-down">3</i>
+					<i class="far fa-thumbs-up">${list.brd_like_count }</i>
+					<i class="fas fa-eye">${list.brd_view_count }</i>
 					<i class="far fa-comment">36</i>
 				</div>
 			</div>
@@ -178,7 +185,13 @@
 		<div class="pageNumWrap">
 			<%-- <c:forEach begin="1" end="${pageMaxNum }" step="1" var="i"> --%>
 			<div class="pageNumBox">
-				<c:forEach begin="1" end="20" step="1" var="i">
+			<!--페이징 레이아웃 맞추기  -->
+				<c:set value="${pageMaxNum }" var="pagingDummyNum" />
+				<c:if test="${pageMaxNum < 5 }">
+					<c:set value="5" var="pagingDummyNum" />
+				</c:if>
+			<!--  -->
+				<c:forEach begin="1" end="${pagingDummyNum }" step="1" var="i">
 					<div class="pageNum" onclick="pageChange(${i})"><p class="pagingNum"><c:out value="${i }" /></p></div> 
 				</c:forEach>
 			</div>
@@ -207,13 +220,21 @@
 		
 		function pageChange(pageNum){
 			var no = document.getElementById("no").value;
-		
+			console.log("pageChg")
+			if(pageNum > document.getElementById("pageMaxNum").value){
+				alert('마지막 페이지입니다.')
+				return;
+			}
+			console.log("pageNum : "+pageNum)
+			console.log("ss : "+document.getElementById("pageMaxNum").value)		
 			location.href="/devst/board/category?no="+no+"&pageNum="+pageNum;
+			
 		}
 		
 		function itemDetail(item_id){
 			var no = document.getElementById("no").value;
-			location.href="/devst/board/detail/category?no="+no+ "&id="+item_id;
+			location.href="/devst/board/detail/category?id="+item_id+ "&no="+no;
+			
 			
 		}
 		
