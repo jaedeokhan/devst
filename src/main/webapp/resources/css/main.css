@@ -53,7 +53,7 @@
 	.navItems:hover{border-color:rgba(5,195,157,0.7)}
 	.navItems.active{border-color:rgba(5,195,157,0.7) }
 	.mainItemsComment{margin-right: 10px;}
-	
+	#certified{width: 100vw;  position: absolute;height: 100vh;}
 	
 	.mainItmesNm p{
 		width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;

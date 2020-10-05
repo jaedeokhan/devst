@@ -26,6 +26,9 @@
 
 </head>
 <body>
+<div id="certified">
+
+</div>
 dd : ${loginUser }
 
  <%-- dd : ${loginUserSec }<br>

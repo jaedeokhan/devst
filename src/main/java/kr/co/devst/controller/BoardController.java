@@ -102,7 +102,9 @@ public class BoardController {
             for(ObjectError e : list) {
             	msg+="\n"+e.getDefaultMessage();
                  System.out.println("error : "+e.getDefaultMessage());
-            }
+                 System.out.println(loginUser);
+                 System.out.println("vo : "+param.getMemId());
+            } 
 			
 			request.setAttribute("msg", msg);
 			rd.forward(request, response);
@@ -142,14 +144,13 @@ public class BoardController {
 	public void goBoardModify(HttpServletRequest request, HttpServletResponse response, BoardVO vo) throws IOException, ServletException {
 		String id = request.getParameter("id");//게시물번호
 		String no = request.getParameter("no");//게시물 카테고리
-		String memId = request.getParameter("memId");
 		log.debug("게시물번호id :::: "+id);
 		log.debug("카테고리no :::: "+no);
 		log.debug("게시물 정보 카테고리:::: "+vo.getBrdCategory());
 		log.debug("게시물 정보 내용:::: "+vo.getBrdContent());
 		log.debug("게시물 정보 제목:::: "+vo.getBrdTitle());
-		
-		vo.setMemId(Utils.parseToInt(memId, 10));
+		UserVO loginUser = (UserVO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		vo.setMemId(loginUser.getMemId());
 		vo.setBrdId(Utils.parseToInt(id, 0));
 		
 		
@@ -262,7 +263,10 @@ public class BoardController {
 		  return "/user/board/regMod.tilesAll"; 
 	  }
 	  
-	  
+	  @RequestMapping(value = "/certified")
+	  public String goCertified() {
+		  return "/user/certified";
+	  }
 	 
 	
 	

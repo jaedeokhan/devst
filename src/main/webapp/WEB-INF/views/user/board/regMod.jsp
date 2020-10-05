@@ -41,7 +41,7 @@
 		<div class="boardBox">
 			<form action="/devst/board/regmod?${_csrf.parameterName}=${_csrf.token}" id="frm" method="post" enctype="multipart/form-data">
 			
-			<input type="hidden" value="${oneInfo.mem_id }" name="memId"><!-- 이 값이 있고, db에도 해당값이있다면 수정으로 판명 -->
+			<%-- <input type="hidden" value="${oneInfo.mem_id }" name="memId"><!-- 이 값이 있고, db에도 해당값이있다면 수정으로 판명 --> --%>
 			
 			<select name="brdCategory" class="boardCategory" >
 			    <option value="스터디구인">스터디구인</option>
