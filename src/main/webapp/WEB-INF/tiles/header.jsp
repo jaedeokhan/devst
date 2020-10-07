@@ -12,15 +12,17 @@
 			
 			<div class="headerLeft">
 				<img src="/resources/img/logo.png"  id="logo" class="headerLeftItems">
-				<a href="#" class="headerLeftItems">Teach Q&A</a>
-				<a href="#" class="headerLeftItems">스터디 구인</a>
+				<a href="/devst/board/category?no=1" class="headerLeftItems">Teach Q&A</a>
+				<a href="/devst/board/category?no=2" class="headerLeftItems">스터디 구인</a>
 				<a href="#" class="headerLeftItems">알고리즘 스터디</a>
+				<a href="/devst/board/regmod" class="headerLeftItems">글 작성</a>
+				<a href="/" class="headerLeftItems">메인</a>
 			</div>
 			<sec:authorize access="isAnonymous()">
 			<div class="headerRight">
 				<div class="search headerRightItems"><input type="text" placeholder="내용을 입력하세요"><i class="fas fa-search"></i></div>
 				<a href="/devst/user/loginPage" class="headerRightItems">로그인</a>
-				<a href="#" class="headerRightItems">회원가입</a>	
+				<a href="/devst/user/joinPage" class="headerRightItems">회원가입</a>	
 				<img src="https://placehold.it/64x64" class="headerLeftItems">
 			</div>
 			</sec:authorize>	

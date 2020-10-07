@@ -26,10 +26,10 @@
 
 </head>
 <body>
-<div id="certified">
+<!-- <div id="certified">
 
-</div>
-dd : ${loginUser }
+</div> -->
+<%-- dd : ${loginUser } --%>
 
  <%-- dd : ${loginUserSec }<br>
  dd : ${loginUser }<br>
@@ -112,7 +112,7 @@ id : ${loginUser.memEmail } --%>
 						</div>
 					</div>
 					<div class="mainItmesMidRight">
-						<div class="mainItmesNm"><img src="https://placehold.it/35x35"><p>닉네임</p></div>
+						<div class="mainItmesNm"><i class="fas fa-user-circle"></i><p>${list.mem_nickname }</p></div>
 						<div class="mainItmesDate"><p>${list.brd_update_date }</p></div>
 					</div>
 				</div>
@@ -155,7 +155,6 @@ id : ${loginUser.memEmail } --%>
 	
 	
 
-	
 	
 </body>
 </html>
