@@ -1,10 +1,10 @@
 @charset "UTF-8";
-.headerWrap{margin:0 auto; width: 100%; overflow:hidden; background-color:rgba(5,195,157,0.7);}
+.headerWrap{margin:0 auto; width: 100%; overflow:hidden; background-color:rgba(5,195,157,0.7); z-index:999;}
 	.headerLeft{float:left;}
 	.headerLeft > .headerLeftItems{float:left; color:#fff;font-size: 18px; line-height: 64px; margin: 0 20px 0 20px;}
 	.headerRight{float:right;}
 	.headerRight > .headerRightItems{float:left; color:#fff; font-size: 18px;line-height: 64px;  margin: 0 20px 0 20px;}
-	#logo{width:164px; height: 64px;}
+	#logo{width:164px; height: 64px; cursor:pointer;}
 	.search{float:left; line-height: 64px;}
 	.search.headerRightItems > input{height:26px; width: 200px; margin-right:10px;}
 	.search.headerRightItems > i{cursor:pointer;}
@@ -42,31 +42,32 @@
 	.mainItemsDesc{width: 90%; margin:0 auto;}
 	.categoryColorBlue{background-color:rgba(102,141,246,0.7); height: 5px; width: 100%;}
 	.categoryColorGreen{background-color:rgba(5,195,157,0.7); height: 5px; width: 100%;}
-	.mainItemsDescWrap{background-color:#f4f4f4; height: 150px; position: relative;}
+	.mainItemsDescWrap{background-color:#f4f4f4; height: 150px; position: relative; z-index: -3;}
 	.mainItemsViews{margin-left:10px; margin-bottom: 10px;}
 	.viewCnt, .goodCnt, .badCnt,.comment{line-height: 35px;}
 	.mainItemsBad{margin-right: 10px;}
 	#main{margin-bottom: 100px;}
 	.mainItemsGood{margin-right: 10px;}
-	.fa-comment, .fa-thumbs-down, .fa-thumbs-up, .fa-eye{font-size: 25px; line-height: 35px;}
+	.fa-comment, .fa-thumbs-down, .fa-thumbs-up, .fa-eye, .fa-user-circle{font-size: 25px; line-height: 35px;}
 	.fa-thumbs-down{vertical-align: bottom;}
 	.navItems:hover{border-color:rgba(5,195,157,0.7)}
 	.navItems.active{border-color:rgba(5,195,157,0.7) }
 	.mainItemsComment{margin-right: 10px;}
-	
+	#certified{width: 100vw;  position: absolute;height: 100vh;}
 	
 	.mainItmesNm p{
 		width:60px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
 	}	
+	.mainItemsTitle{
+	 padding:0 5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+	}
 
   .mainItemsDesc {
 	position:absolute;
 	left:50%;
 	top:50%;
 	transform:translate(-50%,-50%);
-	display: -webkit-box;
-	word-break:break-all;
-	word-wrap:break-word;
+	
 	text-overflow: ellipsis;
 	overflow: hidden;
 	height:60px;

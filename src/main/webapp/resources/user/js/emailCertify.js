@@ -13,6 +13,7 @@ function emailChk() {
 	}
 }
 
+
 // 인증번호 보내기
 function emailSend() {
 	var frm = document.emailCertifyForm;

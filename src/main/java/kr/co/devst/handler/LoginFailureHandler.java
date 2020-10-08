@@ -35,6 +35,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		
 		String memEmail = request.getParameter(memEmailName);
 		String memPassword = request.getParameter(memPasswordName);
+		System.out.println("memEmail : "+memEmail);
+		System.out.println("memPw : "+memPassword);
 		String errorMsg = null;
 		int loginFailcount = 0;
 		
