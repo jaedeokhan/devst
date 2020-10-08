@@ -95,7 +95,7 @@ $(function(){
 									+'</div>'
 								+'</div>'
 								+'<div class="mainItmesMidRight">'
-									+'<div class="mainItmesNm"><img src="https://placehold.it/35x35"><p>'+data.jsonData[i].mem_nickname+'</p></div>'
+									+'<div class="mainItmesNm"><i class="fas fa-user-circle"></i><p>'+data.jsonData[i].mem_nickname+'</p></div>'
 									+'<div class="mainItmesDate"><p>'+data.jsonData[i].brd_update_date+'</p></div>'
 								+'</div>'
 							+'</div>'
