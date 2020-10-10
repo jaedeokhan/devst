@@ -21,15 +21,20 @@
 <title>Insert title here</title>
 <style>
 	.boardWrap{width:1200px;  margin:0 auto;}
-	.boardBox{margin:0 auto; width:800px;}
+	.boardBox, .boardCommentBox{margin:0 auto; width:800px;}
+	.boardBox{margin-bottom: 100px;}
 	.boardCategory, .boardTitle, .boardHashtag, .boardWriter{width:800px; height:30px; margin: 10px 0;}
 	.boardCategory{width:810px;}
 	.boardContent{width:800px; height:600px;}
 	.doBtn, .doModBtn{position:absolute; bottom:-61px;right:0; width: 90px;}
 	.cancleBtn{position:absolute; bottom:-60px; left:0; width: 90px;}
 	.btnBox{width:800px;position:relative;}
-
+	.dummyLine{background-color:#ddd; width: 90%; height: 1px;}
+	.clickBox{margin: 10px  0;}
 	#msg{color:red;}
+	.profileImg {width: 50px; height: 50px;  border-radius: 70%; overflow: hidden;}
+	.profile {width: 100%; height: 100%; object-fit: cover;}
+	.like , .comment{color: black; line-height: 25px;  font-size: 25px;}
 </style>
 </head>
 <body>
@@ -56,7 +61,9 @@
 				<input type="text" placeholder="hashtag" name="brdHashtag" class="boardHashtag">
 				<textarea name="brdContent" class="boardContent" ${guestMode } >${oneInfo.brd_content }</textarea>
 				<div class="btnBox">
+				<c:if test="${guestMode eq '' }" >
 					<input type="file" name="multiFile" class="boardImg" accept="image/*">
+				</c:if>
 					<c:if test="${guestMode eq ''}" >
 						<button type="submit" class="btn btn-dark doBtn">&nbsp 작성 &nbsp</button>
 					</c:if>
@@ -70,6 +77,23 @@
 				 
 			</form>
 			
+		</div>
+		
+		<div class="boardCommentBox">
+			<c:if test="${guestMode ne ''}" >
+				<a href="#">${oneInfo.mem_nickname }님의 게시글 더보기 > </a>			
+			</c:if>
+			<div class="clickBox">
+				<span class="like">좋아요</span><i class="far fa-thumbs-up">24</i>
+				<span class="comment">댓글</span><i class="far fa-comment">12</i>
+			</div>
+			<h3>댓글</h3>
+			<div class="boardComment">
+				<div class="dummyLine"></div>
+				<div class="profileImg" style="background: #BDBDBD;">
+				    <img class="profile" src="https://placehold.it/50x50">
+				</div>
+			</div>
 		</div>
 		
 	</div>

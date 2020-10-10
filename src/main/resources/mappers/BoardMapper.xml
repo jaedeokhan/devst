@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="getMainBoardList10" resultType="HashMap" parameterType="hashMap">
-		SELECT  A.mem_nickname, B.*
+		SELECT  A.mem_nickname, B.brd_title, B.brd_content, B.brd_category, B.brd_view_count, B.brd_like_count, B.brd_create_date, B.brd_update_date,B.brd_id
 		FROM member_tb as A
 		INNER JOIN board_tb as B
 		ON A.mem_id = B.mem_id
