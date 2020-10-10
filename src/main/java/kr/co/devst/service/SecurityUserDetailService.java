@@ -7,21 +7,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import kr.co.devst.controller.UserController;
-import kr.co.devst.dao.SecurityUserAuthDAOImpl;
 import kr.co.devst.model.UserVO;
 
 public class SecurityUserDetailService implements UserDetailsService{
 
 	@Autowired
-	private SecurityUserAuthDAOImpl securityUserAuthDAO;
+	private SecurityUserService securityUserService;
 	private static final Log log = LogFactory.getLog(SecurityUserDetailService.class);
 	@Override
 	public UserDetails loadUserByUsername(String memEmail) throws UsernameNotFoundException {
 		
-		
-		
-		UserVO user = securityUserAuthDAO.getUserById(memEmail);
+		UserVO user = securityUserService.getUserById(memEmail);
 		if(user == null) {
 			
 			throw new UsernameNotFoundException(memEmail);

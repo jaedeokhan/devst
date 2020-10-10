@@ -29,7 +29,7 @@
 			<sec:authorize access="isAuthenticated()">		
 			<div class="headerRight">
 				<div class="search headerRightItems"><input type="text" placeholder="내용을 입력하세요"><i class="fas fa-search"></i></div>
-				<a href="#" class="headerRightItems" id="user_info">회원정보</a>			
+				<a href="#" class="headerRightItems" id="user_info"><sec:authentication property="principal.memNickname"/>님</a>			
 				<a href="#" class="headerRightItems" onclick="document.getElementById('logout-form').submit();">로그아웃</a>
 				<img src="https://placehold.it/64x64" class="headerLeftItems">
 				<form id="logout-form" action='<c:url value='/logout'/>' method="POST">
