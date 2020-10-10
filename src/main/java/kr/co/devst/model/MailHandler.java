@@ -1,4 +1,4 @@
-package kr.co.devst.service;
+package kr.co.devst.model;
 
 import java.io.File;
 import java.io.IOException;
