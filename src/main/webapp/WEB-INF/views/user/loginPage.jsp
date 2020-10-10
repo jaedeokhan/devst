@@ -26,7 +26,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 </head>
-<body>
+<body>s
       <br><br>
       <div class="container text-center">
           <h1>Devst</h1><br>
@@ -43,8 +43,8 @@
 	          </div>
 	       	  <c:if test="${not empty errorMessage}">
 	       	  	<font color="red">
-	       	  		<p>${errorMessage} [${count}/5]</p>
-	       	  	</font>
+	       	  		<p>${errorMessage}</p>
+	       	  	</font> 
 	       	  </c:if>
 <!-- 	          <div class="form-check">
 	              <label class="form-check-label">

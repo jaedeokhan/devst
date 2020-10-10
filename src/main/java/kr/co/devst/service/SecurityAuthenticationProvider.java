@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import kr.co.devst.controller.UserController;
 import kr.co.devst.model.UserVO;
 
 public class SecurityAuthenticationProvider implements AuthenticationProvider{
@@ -44,9 +43,9 @@ public class SecurityAuthenticationProvider implements AuthenticationProvider{
         	throw new BadCredentialsException(memEmail);
         }
         
-        log.debug("AuthenticationProvider + memEmail + :: 성공");
-        
-		return new UsernamePasswordAuthenticationToken(memEmail, memPassword, user.getAuthorities());
+        log.debug("AuthenticationProvider : " + memEmail + ":: 성공");
+        user.setMemPassword("null");
+		return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 	}
 
 	@Override

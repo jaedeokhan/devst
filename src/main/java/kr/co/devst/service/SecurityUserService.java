@@ -1,15 +1,11 @@
 package kr.co.devst.service;
 
+import kr.co.devst.model.UserVO;
+
 public interface SecurityUserService {
 
-	void countFailure(String username);
-
-	int checkFailureCount(String username);
-
-	void disabledUsername(String username);
-
-	void resetFailureCnt(String username);
-
+	UserVO getUserById(String memEmail);
+	
 	void modifyAccessDate(String username);
 
 }

@@ -36,7 +36,6 @@ public class UserServiceImple implements UserService{
 	public int doJoin(UserVO userVO) throws Exception {
 		// 사용자가 입력한 비밀번호 암호화
 		userVO.setMemPassword(pwEncoder.encode(userVO.getMemPassword()));
-		//userVO.setMemPassword(userVO.getMemPassword());//암호화 x
 		return userDao.doJoin(userVO);
 	}
 

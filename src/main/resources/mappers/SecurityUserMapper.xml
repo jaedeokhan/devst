@@ -12,7 +12,7 @@
 			mem_email = #{memEmail}
 	</select>
 
-	<update id="updateFailureCount">
+<!-- 	<update id="updateFailureCount">
 		UPDATE
 			member_tb
 		SET
@@ -46,7 +46,7 @@
 			mem_login_fail_count = 0
 		WHERE
 			mem_email = #{memEmail}
-	</update>
+	</update> -->
 	
 	<update id="updateAccessDate">
 		UPDATE

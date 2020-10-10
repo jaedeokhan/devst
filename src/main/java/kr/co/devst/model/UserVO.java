@@ -13,7 +13,6 @@ public class UserVO implements UserDetails {
 	private int memId;
 	private String memEmail;
 	private String memPassword;
-	private String memUsername;
 	private String memNickname;
 	private String memGrade;
 	private Date memSingupDate;
@@ -34,7 +33,7 @@ public class UserVO implements UserDetails {
 	}
 	@Override
 	public String getUsername() {
-		return memNickname;
+		return memEmail;
 	}
 	@Override
 	public boolean isAccountNonExpired() {
@@ -53,29 +52,23 @@ public class UserVO implements UserDetails {
 		return memEnabled;
 	}
 	
-	public int getMemId() {
-		return memId;
-	}
-	public void setMemId(int memId) {
-		this.memId = memId;
-	}
 	public String getMemEmail() {
 		return memEmail;
 	}
 	public void setMemEmail(String memEmail) {
 		this.memEmail = memEmail;
 	}
+	public int getMemId() {
+		return memId;
+	}
+	public void setMemId(int memId) {
+		this.memId = memId;
+	}
 	public String getMemPassword() {
 		return memPassword;
 	}
 	public void setMemPassword(String memPassword) {
 		this.memPassword = memPassword;
-	}
-	public String getMemUsername() {
-		return memUsername;
-	}
-	public void setMemUsername(String memUsername) {
-		this.memUsername = memUsername;
 	}
 	public String getMemNickname() {
 		return memNickname;
@@ -109,8 +102,8 @@ public class UserVO implements UserDetails {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [memId=" + memId + ", memEmail=" + memEmail + ", memPassword=" + memPassword + ", memUsername="
-				+ memUsername + ", memNickname=" + memNickname + ", memGrade=" + memGrade + ", memSingupDate="
+		return "UserVO [memId=" + memId + ", memEmail=" + memEmail + ", memPassword=" + memPassword 
+				+ ", memNickname=" + memNickname + ", memGrade=" + memGrade + ", memSingupDate="
 				+ memSingupDate + ", memSigninDate=" + memSigninDate + ", memProfileImage=" + memProfileImage
 				+ ", memAuthority=" + memAuthority + ", memEnabled=" + memEnabled + "]";
 	}

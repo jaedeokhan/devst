@@ -40,7 +40,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		String memEmail = request.getParameter(memEmailName);
 		
-		securityUserService.resetFailureCnt(memEmail);
+		/* securityUserService.resetFailureCnt(memEmail); */
 		securityUserService.modifyAccessDate(memEmail);
 		
 		//에러 세션 지우기
