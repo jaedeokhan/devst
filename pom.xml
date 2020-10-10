@@ -58,7 +58,6 @@
 			<version>${spring.security.version}</version>
 		</dependency>
 		
-		
 		<!--valid  -->
 		<dependency>
 		    <groupId>javax.validation</groupId>
@@ -112,8 +111,6 @@
 				
 		
 
-
-	
 		<!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
 		<dependency>
 		    <groupId>commons-logging</groupId>

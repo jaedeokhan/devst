@@ -38,37 +38,26 @@
 	
 	<!-- multipart filter -->	
 	<filter>
-
-     <display-name>springMultipartFilter</display-name>
-
-     <filter-name>springMultipartFilter</filter-name>
-
-     <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
-
-
-
-     <init-param>
-
-   <param-name>multipartResolverBeanName</param-name>
-
-   <param-value>multipartResolver</param-value>
-
-     </init-param>
-
- 
-
- </filter>
+	    <display-name>springMultipartFilter</display-name>
+	    <filter-name>springMultipartFilter</filter-name>
+	    <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	    
+	    <init-param>
+	  		<param-name>multipartResolverBeanName</param-name>
+	  		<param-value>multipartResolver</param-value>
+	    </init-param>
+	</filter>
 
 
-	   <!-- Spring Security -->
-   <filter>
-      <filter-name>springSecurityFilterChain</filter-name>
-      <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-   </filter>
-
-   <filter-mapping>
-      <filter-name>springSecurityFilterChain</filter-name>
-      <url-pattern>*</url-pattern>
-   </filter-mapping>
+	<!-- Spring Security -->
+	<filter>
+	   <filter-name>springSecurityFilterChain</filter-name>
+	   <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	   <filter-name>springSecurityFilterChain</filter-name>
+	   <url-pattern>*</url-pattern>
+	</filter-mapping>
 
 </web-app>

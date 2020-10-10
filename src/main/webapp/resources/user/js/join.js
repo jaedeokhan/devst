@@ -1,7 +1,7 @@
 // 회원가입 유효성 검사
 function joinChk() {
 	var frm = document.memberJoinForm;
-	var pwRule = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,16}$/; //조건1. 6~16 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
+	var pwRule = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,16}$/; //조건1. 6~20 영문 대소문자 , 최소 1개의 숫자 혹은 특수 문자를 포함해야 함
 
 	if (frm.mem_email.value.length == 0) {
 		alert("이메일을 입력하세요.");
