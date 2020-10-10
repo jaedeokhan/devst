@@ -12,8 +12,11 @@ public interface BoardService {
 	public List<BoardVO> getBoardListAll();
 	public List<Map<String, String>> getBoardStudyList(int start, int num);
 	public List<Map<String, String>> getBoardNomalList(int start, int num); 
-	public int getPageNum(String category);
+	
 	
 	public HashMap<String, String> getBoardOneInfo(BoardVO param);
 	public List<Map<String,String>> getMainBoardList10(String category);
+	public int boardModify(BoardVO param);
+	public int boardUpHits(int brdId);
+	public int boardMaxPageNum(String category);
 }

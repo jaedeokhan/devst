@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="doJoin">
-		INSERT INTO member_tb (mem_email, mem_password, mem_username, mem_nickname, mem_profile_image) 
-		VALUES (#{memEmail}, #{memPassword}, #{memUsername}, #{memNickname}, #{memProfileImage})
+		INSERT INTO member_tb (mem_email, mem_password, mem_nickname, mem_profile_image) 
+		VALUES (#{memEmail}, #{memPassword}, #{memNickname}, #{memProfileImage})
 	</insert>
 </mapper>

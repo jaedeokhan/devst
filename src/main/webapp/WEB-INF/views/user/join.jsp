@@ -23,7 +23,7 @@
 	        </tr>
 	        <tr>
 	            <td class="small_input">
-	                <input type="email" name="memEmail" id="mem_email" value="${memEmail }" readonly>
+	                <input type="email" name="memEmail" id="mem_email" value="${memEmail }" >
 	            </td>
 	        </tr>
 	        <tr>
@@ -41,12 +41,12 @@
 	        </tr>
 	        <tr>
 	            <td class="label_row"><label for="mem_username">이름*</label></td>
-	       	</tr>
+	       	</tr> 
 	        <tr>
 	            <td class="big_input"><input type="text" name="memUsername" id="mem_username"></td>
 	        </tr>
 	        <tr>
-	            <td class="label_row"><label for="mem_nickname">닉네임*</label></td>
+	            <td class="label_row"><label for="memNickname">닉네임*</label></td>
 	       	</tr>
 	        <tr>
 	            <td class="big_input">
@@ -58,6 +58,7 @@
 <!-- 			    <td class="label_row"><label for="mem_profile_image">프로필 사진*</label></td> -->
 <!-- 			</tr> -->
 		</table>
+		<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 		<div class="btn">
 			<input type="submit" value="회원가입" id="joinbtn">
 		</div>

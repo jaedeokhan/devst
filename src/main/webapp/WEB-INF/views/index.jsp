@@ -1,11 +1,17 @@
+<%@page import="org.springframework.security.core.Authentication"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@page import="org.springframework.security.core.userdetails.UserDetails"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>    
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+<meta name="_csrf" content="${_csrf.token}" />
 <meta charset="UTF-8">
 <title>devst</title>
 <link href="<c:url value="/resources/css/reset.css" />"  rel="stylesheet">
@@ -15,11 +21,23 @@
 <script src="/resources/js/main.js"/></script>
 
 
-
+<sec:authentication property="principal" var="loginUser"/>
 
 
 </head>
 <body>
+<!-- <div id="certified">
+
+</div> -->
+<%-- dd : ${loginUser } --%>
+
+ <%-- dd : ${loginUserSec }<br>
+ dd : ${loginUser }<br>
+id : ${loginUser.memEmail } --%>
+
+
+
+
 	<%-- <header id="header">
 		<div class="headerWrap">
 			
@@ -74,7 +92,7 @@
 		
 		</c:forEach>  -->
 			<c:forEach  var="list" items = "${boardList }" >
-			<div class="mainItems">
+			<div class="mainItems" onclick="boardDetailOne(${list.brd_id}, '${list.brd_category }')">
 				<c:if test="${list.brd_category eq '일반'}">
 					<div class="categoryColorBlue"></div>
 				</c:if>
@@ -90,11 +108,11 @@
 						</div>
 						<div class="mainItemsMidLeftBot">
 							<div class="mainItemsComment"><i class="far fa-comment"></i><p class="comment">10</p></div>
-							<div class="mainItemsBad"><i class="fas fa-eye"></i><p class="viewCnt">15</p></div>
+							<div class="mainItemsBad"><i class="fas fa-eye"></i><p class="viewCnt">${list.brd_view_count }</p></div>
 						</div>
 					</div>
 					<div class="mainItmesMidRight">
-						<div class="mainItmesNm"><img src="https://placehold.it/35x35"><p>닉네임</p></div>
+						<div class="mainItmesNm"><i class="fas fa-user-circle"></i><p>${list.mem_nickname }</p></div>
 						<div class="mainItmesDate"><p>${list.brd_update_date }</p></div>
 					</div>
 				</div>
@@ -137,7 +155,6 @@
 	
 	
 
-	
 	
 </body>
 </html>
