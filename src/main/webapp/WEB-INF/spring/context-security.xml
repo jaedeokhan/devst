@@ -24,9 +24,9 @@
                     authentication-success-handler-ref="loginSuccessHandler"
             />
            <!-- 403 page[ex) user가 admin 접근] -->
-            <!-- <security:access-denied-handler
+           <security:access-denied-handler
                     error-page="/devst/user/access_denied_page"
-            /> -->
+            />
        		 <!-- logout -->
             <security:logout
                     logout-url="/logout"
@@ -46,8 +46,7 @@
 		    <property name="memEmailName" value="memEmail"/>
 		    <property name="memPasswordName" value="memPassword"/>
 		    <property name="errorMessageName" value="errorMessage"/>
-		    <property name="defaultFailureUrlName" value="/devst/user/loginPage?error"/>		
-		    <property name="loginFailCountName" value="count"/>	
+		    <property name="defaultFailureUrlName" value="/devst/user/loginPage?error"/>			
 		</bean>
 		
 		<bean id="loginSuccessHandler" class="kr.co.devst.handler.LoginSuccessHandler">

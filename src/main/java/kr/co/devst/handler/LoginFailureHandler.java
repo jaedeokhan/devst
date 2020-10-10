@@ -27,7 +27,6 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 	private String memPasswordName;
 	private String errorMessageName;
 	private String defaultFailureUrlName;
-	private String loginFailCountName;
 
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
@@ -38,10 +37,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		System.out.println("memEmail : "+memEmail);
 		System.out.println("memPw : "+memPassword);
 		String errorMsg = null;
-		int loginFailcount = 0;
 		
 		if(exception instanceof BadCredentialsException) {
-			loginFailcount = loginFailureCount(memEmail); 
 			errorMsg = MessageUtils.getMessage("error.BadCredentials");
 		} else if(exception instanceof InternalAuthenticationServiceException) {
 			errorMsg = MessageUtils.getMessage("error.BadCredentials");
@@ -56,20 +53,17 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		request.setAttribute(memEmailName, memEmail);
 		request.setAttribute(memPasswordName, memPassword);
 		request.setAttribute(errorMessageName, errorMsg);
-		request.setAttribute(loginFailCountName, loginFailcount);
 		request.getRequestDispatcher(defaultFailureUrlName).forward(request, response);
 	}
 	
 	
-	protected Integer loginFailureCount(String memEmail) {
-	  securityUserService.countFailure(memEmail); 
-	  int cnt = securityUserService.checkFailureCount(memEmail); 
-	  if(cnt==5) {
-		  securityUserService.disabledUsername(memEmail); 
-	  } 
-	  return cnt; 
-	  }
-
+	
+	/*
+	 * protected Integer loginFailureCount(String memEmail) {
+	 * securityUserService.countFailure(memEmail); int cnt =
+	 * securityUserService.checkFailureCount(memEmail); if(cnt==5) {
+	 * securityUserService.disabledUsername(memEmail); } return cnt; }
+	 */
 	public String getMemEmailName() {
 		return memEmailName;
 	}
@@ -110,14 +104,13 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 	}
 
 
-	public String getLoginFailCountName() {
-		return loginFailCountName;
-	}
-
-
-	public void setLoginFailCountName(String loginFailCountName) {
-		this.loginFailCountName = loginFailCountName;
-	}
+	/*
+	 * public String getLoginFailCountName() { return loginFailCountName; }
+	 * 
+	 * 
+	 * public void setLoginFailCountName(String loginFailCountName) {
+	 * this.loginFailCountName = loginFailCountName; }
+	 */
 	
 	
 
