@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.co.devst.dao.SecurityUserAuthDAO">
+	<select id="selectUserById" resultType="UserVO">
+		SELECT 
+			mem_id, mem_email, mem_password, mem_authority, mem_enabled, mem_nickname
+		FROM
+			member_tb
+		WHERE
+			mem_email = #{memEmail}
+	</select>
+
+	<update id="updateFailureCount">
+		UPDATE
+			member_tb
+		SET
+			mem_login_fail_count = mem_login_fail_count + 1
+		WHERE
+			mem_email = #{memEmail}
+	</update>
+	
+	<select id="checkFailureCount" resultType="int">
+		SELECT
+			mem_login_fail_count
+		FROM
+			member_tb
+		WHERE
+			mem_email = #{memEmail}
+	</select>
+	
+	<update id="updateUnenabled">
+		UPDATE
+			member_tb
+		SET
+			mem_enabled = false
+		WHERE
+			mem_email = #{memEmail}
+	</update>
+	
+	<update id="updateFailureCountReset">
+		UPDATE
+			member_tb
+		SET
+			mem_login_fail_count = 0
+		WHERE
+			mem_email = #{memEmail}
+	</update>
+	
+	<update id="updateAccessDate">
+		UPDATE
+			member_tb
+		SET
+			mem_signin_date = SYSDATE()
+		WHERE
+			mem_email = #{memEmail}
+	</update>
+	
+</mapper>

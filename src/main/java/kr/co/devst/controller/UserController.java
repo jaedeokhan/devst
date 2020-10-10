@@ -102,7 +102,7 @@ public class UserController {
 		int result = userService.doJoin(userVO);
 		System.out.println(result);
 		if(result != 1) 
-			resultAddr = "redirect:/devst/user/joinPage?error=-1";
+			resultAddr = "redirect:/devst/user/joinPage?error";
 		else {
 			rttr.addFlashAttribute("joinSuccessMsg","가입에 성공했습니다. 로그인해주세요.");
 			resultAddr = "redirect:/devst/user/loginPage";
@@ -111,26 +111,4 @@ public class UserController {
 	}
 
 	
-	// 로그인 페이지 이동
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String goLogin(Model model) {
-		log.debug("********** 로그인 페이지 **********");
-		return "/user/loginPage";
-	}
-	
-	// 로그인
-	/*
-	 * @RequestMapping(value = "/login", method = RequestMethod.POST) public int
-	 * doLogin(Model model, UserVO userVO) throws Exception{
-	 * log.debug("********* 로그인 @실행@ **********");
-	 * 
-	 * return 1; }
-	 */
-	
-	// 로그인 권한 실패 403 => user 가 admin에 접근하면 띄워주는 화면
-	@RequestMapping(value="access_denied_page", method=RequestMethod.GET)
-	public String goAccessDeined() {
-		return "/access_denied_page";
-	}
-
 }

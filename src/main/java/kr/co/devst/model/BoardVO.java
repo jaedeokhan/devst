@@ -12,12 +12,11 @@ public class BoardVO {
 	
 	
 	@NotEmpty(message = "제목을 입력해주세요")
-	@Size(message = "제목은 4자이상 20자 미만입니다.")
+	@Size(min = 4, max = 20, message = "제목은 4자이상 20자 미만입니다.")
 	private String brdTitle;
 	
 	@NotEmpty(message = "내용을 입력해주세요")
 	private String brdContent;
-	
 	private String brdImage;
 	private String brdCategory;
 	private String brdHashtag;
@@ -26,6 +25,22 @@ public class BoardVO {
 	private int brdDislikeCount;
 	private String brdCreateDate; // r_dt
 	private String brdUpdateDate; // m_dt
+	
+	
+	
+	private int memId;//user_tb fk
+	
+	
+	
+	
+	
+	
+	public int getMemId() {
+		return memId;
+	}
+	public void setMemId(int memId) {
+		this.memId = memId;
+	}
 	public int getBrdId() {
 		return brdId;
 	}

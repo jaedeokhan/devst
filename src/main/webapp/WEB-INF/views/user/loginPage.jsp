@@ -24,7 +24,7 @@
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
       <br><br>
@@ -35,24 +35,23 @@
 	      <form class="px-4 py-3" action="/login" method="post">
 	          <div class="form-group">
 	              <label for="exampleDropdownFormEmail1">ID</label>
-	              <input type="text" class="form-control" name="memEmail" placeholder="example">
+	              <input type="text" class="form-control" name="memEmail" placeholder="아이디를 입력해주세요" value="${memEmail}">
 	          </div>
 	          <div class="form-group">
 	              <label for="exampleDropdownFormPassword1">Password</label>
-	              <input type="password" class="form-control" name="memPassword" placeholder="Password">
+	              <input type="password" class="form-control" name="memPassword" placeholder="비밀번호를 입력해주세요" value="${memPassword}">
 	          </div>
-		      <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
-		      	<font color="red">
-		      		<p>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
-		      		<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
-		      	</font>
+	       	  <c:if test="${not empty errorMessage}">
+	       	  	<font color="red">
+	       	  		<p>${errorMessage} [${count}/5]</p>
+	       	  	</font>
 	       	  </c:if>
-	          <div class="form-check">
+<!-- 	          <div class="form-check">
 	              <label class="form-check-label">
 	              <input type="checkbox" class="form-check-input">
 	              Remember me
 	              </label>
-	          </div>
+	          </div> -->
 	          <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 	          <button type="submit" class="btn btn-primary">Sign in</button>
 	      </form>

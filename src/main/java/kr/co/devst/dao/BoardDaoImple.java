@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.devst.model.BoardVO;
+import kr.co.devst.utils.Utils;
 
 
 @Repository
@@ -59,11 +60,6 @@ public class BoardDaoImple implements BoardDao{
 		return sqlSession.selectList(NAME_SPACE+".getBoardNomalList",map);
 	}
 
-	@Override
-	public int getPageNum(String category) {
-		return sqlSession.selectOne(NAME_SPACE+".getPageNum",category);
-	}
-
 
 
 
@@ -82,4 +78,38 @@ public class BoardDaoImple implements BoardDao{
 		
 		return sqlSession.selectList(NAME_SPACE+".getMainBoardList10",map);
 	}
+
+
+
+
+	@Override
+	public int boardModify(BoardVO param) {
+		
+		
+		
+		return sqlSession.update(NAME_SPACE+".boardModify",param);
+	}
+
+
+
+
+	@Override
+	public int boardUpHits(int brdId) {
+
+		return sqlSession.update(NAME_SPACE+".boardUpHits",brdId);
+	}
+
+
+
+
+	@Override
+	public int boardMaxPageNum(String category) {
+		
+		return sqlSession.selectOne(NAME_SPACE+".boardMaxPageNum",category);
+	}
+
+
+
+
+	
 }

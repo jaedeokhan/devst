@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.devst.dao.BoardDao;
 import kr.co.devst.model.BoardVO;
@@ -55,7 +56,7 @@ public class BoardServiceImple implements BoardService{
 	@Override
 	public List<Map<String, String>> getBoardNomalList(int start, int num) {
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
-		list = boardDao.getBoardStudyList(start, num);
+		list = boardDao.getBoardNomalList(start, num);
 	
 		for(int i=0;i<list.size();i++) {
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
@@ -68,17 +69,16 @@ public class BoardServiceImple implements BoardService{
 		return list;
 	}
 	
-	@Override
-	public int getPageNum(String category) {
-		
-		return boardDao.getPageNum(category);
-	}
+	
 
 
 
+	
+	@Transactional
 	@Override
 	public HashMap<String, String> getBoardOneInfo(BoardVO param) {
-		return boardDao.getBoardOneInfo(param);
+		boardDao.boardUpHits(param.getBrdId());	//조회수 증가 작업
+		return boardDao.getBoardOneInfo(param);	//해당 게시물 select 작업
 	}
 
 
@@ -97,6 +97,29 @@ public class BoardServiceImple implements BoardService{
 		
 		
 		return list;
+	}
+
+
+
+	@Override
+	public int boardModify(BoardVO param) {
+
+		return boardDao.boardModify(param);
+	}
+
+
+
+	@Override
+	public int boardUpHits(int brdId) {
+
+		return boardDao.boardUpHits(brdId);
+	}
+
+
+
+	@Override
+	public int boardMaxPageNum(String category) {
+		return boardDao.boardMaxPageNum(category);
 	}
 
 }

@@ -64,9 +64,6 @@
 		LIMIT #{start}, #{num};
 	</select>
 	
-	<select id="getPageNum" resultType="java.lang.Integer">
-		SELECT (TRUNCATE(COUNT(*)/10,0)+1) AS cnt FROM board_tb WHERE brd_category = #{brd_category};
-	</select>
 	
 	<select id="getBoardOneInfo" resultType="hashMap">
 		SELECT  A.mem_nickname, B.*
@@ -75,5 +72,22 @@
 		ON A.mem_id = B.mem_id
 		WHERE B.brd_category = #{brdCategory} AND B.brd_id = #{brdId};
 	</select>
+	
+	<select id="boardMaxPageNum" resultType="java.lang.Integer" parameterType="String">
+		SELECT (TRUNCATE(COUNT(*)/10,0)+1) AS cnt FROM board_tb WHERE brd_category = #{category};
+	
+	</select>
+	
+	
+	<update id="boardModify">
+		UPDATE board_tb SET brd_title = #{brdTitle}, brd_content = #{brdContent}, brd_category = #{brdCategory}, brd_hashtag = #{brdHashtag}, brd_image = #{brdImage}, brd_update_date = now()
+		WHERE brd_id = #{brdId} AND mem_id = #{memId}; 
+	</update>
+	
+	<update id="boardUpHits">
+		UPDATE board_tb SET brd_view_count = brd_view_count + 1 WHERE brd_id = #{brdId};
+	</update>
+	
+	
 	
 </mapper>
